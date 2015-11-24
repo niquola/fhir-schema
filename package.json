@@ -1,0 +1,36 @@
+{
+    "name": "fhir-schema.js",
+    "version": "0.0.1",
+    "devDependencies": {
+        "webpack-dev-server": "latest"
+    },
+    "description": "FHIR javascript validation library",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:FHIR/fhir-validation.js.git"
+    },
+    "scripts": {
+    },
+    "keywords": [
+        "fhir",
+        "schema",
+        "FHIR"
+    ],
+    "author": [
+        "Nikolay Ryzhikov <niquola@gmail.com>"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/FHIR/fhir-validation.js/issues"
+    },
+    "homepage": "https://github.com/FHIR/fhir-validation.js",
+    "dependencies": {
+        "mocha": "latest",
+        "js-yaml": "latest",
+        "tv4": "latest"
+    },
+    "scripts": {
+        "test": "node_modules/mocha/bin/mocha --recursive"
+    },
+    "files": ["bin", "lib", "src"]
+}

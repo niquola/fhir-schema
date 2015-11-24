@@ -1,0 +1,72 @@
+- element:
+    path: "Patient.birthDate"
+    short: "short"
+    definition: "definition"
+    min: 0
+    max: "*"
+    type:
+      - code: "date"
+  result:
+    - type: array
+      title: short
+      $$path: ['Patient','birthDate']
+      minItems: 0
+      items:
+        type: {$ref: '#/definitions/date'}
+
+- element:
+    path: "Patient.birthDate"
+    short: "short"
+    definition: "definition"
+    min: 1
+    max: "1"
+    type:
+      - code: "date"
+  result:
+    - type: {$ref: '#/definitions/date'}
+      title: short
+      $$path: ['Patient','birthDate']
+      # $$required: true
+
+- element:
+    path: "Patient.identifier"
+    short: "short"
+    min: 0
+    max: "*"
+    type:
+      - code: "Identifier"
+  result:
+    - type: array
+      $$path: ['Patient','identifier']
+      title: short
+      minItems: 0
+      items:
+        type: {$ref: '#/definitions/Identifier'}
+
+- element:
+    path: "Patient.link"
+    short: "short"
+    min: 0
+    max: "*"
+    type:
+      - code: "BackboneElement"
+  result:
+    - type: array
+      $$path: ['Patient','link']
+      title: short
+      minItems: 0
+      items:
+        type: object
+- element:
+    path: "Patient.link"
+    short: "short"
+    min: 1 
+    max: 1
+    type:
+      - code: "BackboneElement"
+  result:
+    - type: object
+      $$path: ['Patient','link']
+      title: short
+      additionalProperties: false
+      # $$required: true
