@@ -11,3 +11,4 @@ npm-debug.log
 .term-port
 src/.tern-port
 tmp/
+fhir/
