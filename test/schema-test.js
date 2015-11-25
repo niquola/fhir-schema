@@ -54,22 +54,32 @@ var data = {
     gender: 'memale'
 }
 
+// console.log(
+//     JSON.stringify(
+//         schema.definitions.Patient
+//         , null, "  ")
+// );
 
 console.log(
     JSON.stringify(
         schema.validate(data)
-    )
+        , null, "  ")
 );
 
 var items = fs.readdirSync(__dirname + '/../tmp/')
-for (var i=0; i<items.length; i++) {
+var errors = 0;
+for (var i=0; i< items.length; i++) {
     var file = items[i];
-    if(file.indexOf('.json') > -1){
+    if(file.indexOf('.json') > -1 && file.indexOf('testscript') == -1){
         var resource = JSON.parse(fs.readFileSync(__dirname + '/../tmp/' + file))
-        console.log(resource.resourceType, 'from', file)
         var result = schema.validate(resource)
-        console.log(result.error.message)
-        console.log(JSON.stringify([result.error.dataPath, result.error.schemaPath]))
-        console.log('---')
+        if(result.error) {
+          console.log(resource.resourceType, 'from', file)
+          console.log('===============')
+          errors++;
+          console.log(JSON.stringify(result, null, " "))
+        }
     }
 }
+console.log("PROCESSED: ", items.length)
+console.log("ERRORS: ", errors)

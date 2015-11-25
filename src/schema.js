@@ -1,12 +1,5 @@
 tv4 = require('tv4')
 
-PRIMITIVES = {
-    'string': 'string',
-    'integer': 'integer',
-    'number': 'number',
-    'boolean': 'boolean',
-    'uri': 'uri'
-}
 OVERRIDEN = {
     'date': {},
     'code': {}
@@ -15,10 +8,8 @@ OVERRIDEN = {
 var assert = function(pred, msg){if(!pred) { throw new Error(msg || "Assert failed")}}
 
 var isPrimitive = function(tp){
-    return ['string', 'integer', 'number'].indexOf(tp) > -1
+    return ['string', 'integer', 'number', 'boolean'].indexOf(tp) > -1
 }
-
-var toPrimitive = function(tp){}
 
 var typeRef = function(tp){
     assert(tp, "expected type")
@@ -42,7 +33,7 @@ var elementType = function(el){
     if(! el.type) {return 'object';}
     var code = getIn(el, ['type', 0, 'code'])
     if (code === 'Reference') {
-        return typeRef('Reference')
+        return {$ref: typeRef('Reference')}
     }
     assert(el.type.length == 1, el.path + JSON.stringify(el.type));
     assert(code, JSON.stringify(el))
@@ -78,6 +69,29 @@ var expandPath = function(spath, tp){
     return newpath.join('.');
 }
 
+var isFhirPrimitive = function(el){
+    var tp = getIn(el, ['type', 0, 'code']);
+    return tp && tp[0].toLowerCase() == tp[0]
+}
+var primitiveExtensions = function(prop, el){
+    if(isFhirPrimitive(el)){
+        var path = copy(prop.$$path);
+        var last = path[path.length - 1];
+        path[path.length - 1] = "_" + last;
+        var eprop = null;
+        var extension = {type: 'object', properties: {extension: {type: 'array', items: {oneOf: [{$ref: typeRef('Extension')}, {type: 'null'}]}}}}
+        if(prop.type == 'array'){
+            eprop = {$$path: path, type: 'array', items: {oneOf: [extension, {type: 'null'}]}}
+        }else{
+            extension.$$path = path;
+            eprop = extension;
+        }
+        return [prop, eprop]
+    }else{
+        return [prop]
+    }
+}
+
 var onlyTypedElement2schema = function(el){
     assert(el.path, JSON.stringify(el))
     var path = el.path.split('.');
@@ -87,7 +101,6 @@ var onlyTypedElement2schema = function(el){
         //root element
         res.id = path[0]
         res.type = 'object'
-        res.$inherits = getIn(el, ['type', 0, 'code'])
     } else if (el.max === '*'){
         res.type = 'array' ;
         res.minItems = minItems(el);
@@ -97,6 +110,10 @@ var onlyTypedElement2schema = function(el){
             res.items.$ref = etp.$ref 
         }else{
             res.items.type = etp;
+        }
+        //HACK: handle null in extension and primitve arrays
+        if(path[path.length - 1] == 'extension' || isFhirPrimitive(el)){
+            res.items = {oneOf: [res.items, {type: 'null'}]} 
         }
     } else {
         // res.$$required = isRequired(el);
@@ -109,21 +126,23 @@ var onlyTypedElement2schema = function(el){
     }
     if(res.type == 'object'){
         res.additionalProperties = false
+        res.properties = res.properties || {}
+        res.properties.fhir_comments = {type: 'array', items: {type: 'string'}} 
     }
-    return res
+    return primitiveExtensions(res, el)
 }
 
 var element2schema = function(el){
     assert(el.path, JSON.stringify(el))
     if(isPolymorphic(el)){
-        return el.type.map(function(tp){
+        return el.type.reduce(function(acc, tp){
             var newpath = expandPath(el.path, tp);
-            return onlyTypedElement2schema(
+            return acc.concat(onlyTypedElement2schema(
                 merge(el, {type: [tp], path: newpath})
-            )
-        });
+            ))
+        }, []);
     }
-    return [onlyTypedElement2schema(el)]
+    return onlyTypedElement2schema(el)
 };
 
 exports.element2schema = element2schema;
@@ -156,7 +175,7 @@ var addStructureDefinition = function(schema, structureDefinition){
     var rt = structureDefinition.name
     if(OVERRIDEN[rt]) {return schema}
     var sd =  structureDefinition
-        .differential
+        .snapshot
         .element
         .reduce(function(acc, el){
             var res = element2schema(el)
@@ -168,18 +187,10 @@ var addStructureDefinition = function(schema, structureDefinition){
 
     schema.definitions = schema.definitions || {}
     var resourceSchema = sd.properties[rt]
-    if(resourceSchema){
-        resourceSchema.properties.resourceType = {type: 'string'} 
+    if(resourceSchema && resourceSchema.properties) {
+        resourceSchema.properties.resourceType = {type: 'string'}
     }
-    if(resourceSchema && resourceSchema.$inherits){
-        var base = resourceSchema.$inherits;
-        delete resourceSchema.$inherits;
-        schema.definitions[rt] = {
-            allOf: [{$ref: typeRef(base)}, resourceSchema]
-        }
-    }else {
-        schema.definitions[rt] = resourceSchema;
-    }
+    schema.definitions[rt] = resourceSchema;
     return schema;
 }
 
@@ -200,7 +211,7 @@ var fixSchema = function(schema){
         schema.definitions.Resource.additionalProperties = true
     }
     if(schema.definitions.DomainResource){
-        schema.definitions.DomainResource.allOf[1].additionalProperties = true
+        schema.definitions.DomainResource.additionalProperties = true
     }
     if(schema.definitions.Element){
         schema.definitions.Element.additionalProperties = true
@@ -210,8 +221,21 @@ var fixSchema = function(schema){
         type: 'string',
         pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/
     }
+    schema.definitions.decimal = {
+        id: 'decimal',
+        type: 'number'
+    }
+    schema.definitions.uri = {
+        id: 'uri',
+        type: 'string'
+    }
     schema.definitions.dateTime = {
         id: 'dateTime',
+        type: 'string',
+        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/
+    }
+    schema.definitions.instant = {
+        id: 'instant',
         type: 'string',
         pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/
     }
@@ -225,6 +249,10 @@ var fixSchema = function(schema){
         type: 'string',
         pattern: /[^\s]+([\s]+[^\s]+)*/
     }
+    schema.definitions.code = {
+        id: 'markdown',
+        type: 'string'
+    }
     schema.definitions.id = {
         id: 'id',
         type: 'string',
@@ -234,6 +262,13 @@ var fixSchema = function(schema){
         id: 'oid',
         type: 'string',
         pattern: /urn:oid:[0-2](\.[1-9]\d*)+/
+    }
+    schema.definitions.base64Binary = {
+        id: 'base64Binary',
+        type: 'string',
+        media: {
+            "binaryEncoding": "base64"
+        }
     }
     return schema;
 }
