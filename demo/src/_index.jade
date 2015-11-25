@@ -4,28 +4,18 @@
     .col-xs-2: h3: a(href="https://github.com/niquola/fhir-schema") sources
 .container
   br
-  //- .row
-  //-   .col-xs-8
-  //-     | Examples: &nbsp;
-  //-     span(ng-repeat="(k,ex) in examples")
-  //-       a(ng-click="selectExample(ex)") {{ex.name}} 
-  //-       &nbsp;
-  //-   .col-xs-3
-  //-     input.form-control(placeholder="Save as" ng-model="exampleName")
-  //-   .col-xs-1
-  //-     button.btn.btn-success(ng-click="saveExample()") Save
   .row
     .col-xs-12
       textarea.fh.form-control(ng-model="resource" ui-codemirror="codemirrorConfig" ng-change="update()")
       br
       .alert.alert-danger(ng-if = "parseError") {{parseError}}
 
-  .alert.alert-danger(ng-if = "result.errors.length")
-    div(ng-repeat="err in result.errors") 
-      h4.item(ng-click="err.show = !err.show")
-        b {{err.dataPath.replace('/','.')}} 
-        | {{err.message}} &nbsp;
-        code {{err.params | json}}
-      div(ng-if="err.show") 
-        br 
-        pre {{ err | json }}
+  div.alert.alert-success(ng-if="result.valid") Valid Resource
+  div.alert.alert-danger(ng-repeat="err in result.errors" ng-click="err.show = !err.show") 
+    h4.item
+      b {{err.dataPath.replace('/','.')}} 
+      | {{err.message}} &nbsp;
+      code {{err.params | json}}
+    div(ng-if="err.show") 
+      br 
+      pre {{ err | json }}

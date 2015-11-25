@@ -31,11 +31,13 @@ app.config ($routeProvider) ->
 app.controller 'IndexCtrl', ($scope)->
   $scope.resource = '{"resourceType": "Patient", "name": {"given": ["John"]}}'
   $scope.update = ()->
+    $scope.parseError = null
     try
       resource = JSON.parse($scope.resource)
-      $scope.parseError = null
       $scope.result = fhir.validate(resource)
+      console.log($scope.result)
     catch e
+      $scope.result = null
       $scope.parseError = e.toString()
 
   $scope.update()
