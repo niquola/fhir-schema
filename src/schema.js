@@ -1,5 +1,8 @@
 tv4 = require('tv4')
 
+settings = {}
+exports.settings = settings
+
 OVERRIDEN = {
     date: {
         id: 'date',
@@ -163,6 +166,9 @@ var onlyTypedElement2schema = function(el){
     var path = el.path.split('.');
 
     var res = {$$path: path, title: el.short};
+    if(settings.build){
+        delete res.title
+    }
     if(path.length == 1){
         //root element
         res.id = path[0]

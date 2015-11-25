@@ -12,3 +12,5 @@ npm-debug.log
 src/.tern-port
 tmp/
 fhir/
+src/bundled.js
+src/fhir.schema.jsondemo/dist

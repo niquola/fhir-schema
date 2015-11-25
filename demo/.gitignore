@@ -1,0 +1,8 @@
+dist.tar.gz
+node_modules
+bower_components
+*sw?
+.aidbox.json
+dist
+dist/
+dist/

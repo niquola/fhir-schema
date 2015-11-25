@@ -1,0 +1,41 @@
+{
+  "name": "fhir-path-demo",
+  "version": "0.0.0",
+  "dependencies": {
+    "jsondiffpatch": "latest"
+  },
+  "devDependencies": {
+    "webpack": "latest",
+    "coffee": "latest",
+    "tv4": "latest",
+    "coffee-loader": "latest",
+    "coffee-script": "latest",
+    "less": "latest",
+    "less-loader": "latest",
+    "css-loader": "latest",
+    "json-loader": "latest",
+    "postcss-loader": "latest",
+    "style-loader": "latest",
+    "html-loader": "latest",
+    "file-loader": "latest",
+    "js-yaml": "latest",
+    "jade-env-html-loader": "latest",
+    "jade": "latest",
+    "angular-ui-codemirror": "latest",
+    "extract-text-webpack-plugin": "latest",
+    "webpack-dev-server": "latest",
+    "ng-cache-loader": "latest",
+    "bootstrap": "latest",
+    "mocha": "latest"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "scripts": {
+    "start": "`npm bin`/webpack-dev-server --port 5000 --progress --host 0.0.0.0 --colors --config webpack.config.js",
+    "build": "npm install && `npm bin`/webpack --progress --colors",
+    "watch": "`npm bin`/webpack --progress --colors --watch",
+    "test": "npm run build && `npm bin`/coffee --compile test && ./node_modules/mocha/bin/mocha ./test/formmodel.coffee",
+    "test-watch": "./node_modules/mocha/bin/mocha -w --compilers coffee:coffee-script/register ./test/formmodel.coffee"
+  }
+}

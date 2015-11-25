@@ -27,7 +27,8 @@
     "dependencies": {
         "mocha": "latest",
         "js-yaml": "latest",
-        "tv4": "latest"
+        "tv4": "latest",
+        "json-loader": "latest"
     },
     "scripts": {
         "test": "node_modules/mocha/bin/mocha --recursive"

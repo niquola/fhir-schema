@@ -22,8 +22,8 @@ var tests = loadYaml('./elements-test.yaml')
 
 
 function generateSchema(s){
-    var profiles = require('../fhir/profiles-resources.json')
-    var types = require('../fhir/profiles-types.json')
+    var profiles = require(__dirname + '/../fhir/profiles-resources.json')
+    var types = require(__dirname + '/../fhir/profiles-types.json')
     return (profiles.entry.concat(types.entry)).reduce(function(acc, entry){
         if(entry.resource.resourceType == 'StructureDefinition') {
             return sch.addToSchema(acc, entry.resource);
@@ -33,7 +33,6 @@ function generateSchema(s){
     }, s);
 }
 
-fs = require('fs')
 
 var schema = sch.buildSchema(function(s){
    return generateSchema(s);
@@ -49,6 +48,7 @@ var data = {
     birthDate: '1980',
     gender: 'memale'
 }
+jlog(schema.validate(data));
 
 describe('conversion', function () {
     var items = fs.readdirSync(__dirname + '/../tmp/')
