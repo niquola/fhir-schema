@@ -39,13 +39,9 @@ var schema = sch.buildSchema(function(s){
    return generateSchema(s);
 });
 
-fs.writeFileSync('/tmp/fhir.schema.json', JSON.stringify(schema, null, "  "))
+// fs.writeFileSync('/tmp/fhir.schema.json', JSON.stringify(schema, null, "  "))
 
-// console.log('SCHEMA',
-//             JSON.stringify(
-//                 schema.definitions.Patient
-//                 , null, "  "))
-
+function jlog(x){console.log(JSON.stringify(x,null,"  "))}
 
 var data = {
     resourceType: "Patient",
@@ -54,32 +50,25 @@ var data = {
     gender: 'memale'
 }
 
-// console.log(
-//     JSON.stringify(
-//         schema.definitions.Patient
-//         , null, "  ")
-// );
-
-console.log(
-    JSON.stringify(
-        schema.validate(data)
-        , null, "  ")
-);
-
-var items = fs.readdirSync(__dirname + '/../tmp/')
-var errors = 0;
-for (var i=0; i< items.length; i++) {
-    var file = items[i];
-    if(file.indexOf('.json') > -1 && file.indexOf('testscript') == -1){
-        var resource = JSON.parse(fs.readFileSync(__dirname + '/../tmp/' + file))
-        var result = schema.validate(resource)
-        if(result.error) {
-          console.log(resource.resourceType, 'from', file)
-          console.log('===============')
-          errors++;
-          console.log(JSON.stringify(result, null, " "))
-        }
+describe('conversion', function () {
+    var items = fs.readdirSync(__dirname + '/../tmp/')
+    var errors = 0;
+    for (var i=0; i< items.length; i++) {
+        var file = items[i];
+        it(file, function () {
+            if(file.indexOf('.json') > -1 && file.indexOf('questionnaire') == -1 && file.indexOf('testscript') == -1){
+                var resource = JSON.parse(fs.readFileSync(__dirname + '/../tmp/' + file))
+                var result = schema.validate(resource)
+                assert(!result.error)
+                if(result.error) {
+                    console.log(resource.resourceType, 'from', file)
+                    console.log('===============')
+                    errors++;
+                    console.log(JSON.stringify(result, null, " "))
+                }
+            }
+        })
     }
-}
-console.log("PROCESSED: ", items.length)
-console.log("ERRORS: ", errors)
+    console.log("PROCESSED: ", items.length)
+    console.log("ERRORS: ", errors)
+})

@@ -1,8 +1,74 @@
 tv4 = require('tv4')
 
 OVERRIDEN = {
-    'date': {},
-    'code': {}
+    date: {
+        id: 'date',
+        type: 'string',
+        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/
+    },
+    decimal: {
+        id: 'decimal',
+        type: 'number'
+    },
+    uri: {
+        id: 'uri',
+        type: 'string'
+    },
+    dateTime: {
+        id: 'dateTime',
+        type: 'string',
+        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/
+    },
+    instant: {
+        id: 'instant',
+        type: 'string',
+        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/
+    },
+    time: {
+        id: 'time',
+        type: 'string',
+        pattern: /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/
+    },
+    code: {
+        id: 'code',
+        type: 'string',
+        pattern: /[^\s]+([\s]+[^\s]+)*/
+    },
+    markdown: {
+        id: 'markdown',
+        type: 'string'
+    },
+    id: {
+        id: 'id',
+        type: 'string',
+        pattern: /[A-Za-z0-9\-\.]{1,64}/
+    },
+    oid: {
+        id: 'oid',
+        type: 'string',
+        pattern: /urn:oid:[0-2](\.[1-9]\d*)+/
+    },
+    unsignedInt: {
+        type: 'integer',
+        minimum: 0,
+        exclusiveMinimum: true
+    },
+    positiveInt: {
+        type: 'integer',
+        minimum: 0,
+        exclusiveMinimum: true
+    },
+    uuid: {
+        id: 'uuid',
+        type: 'string'
+    },
+    base64Binary: {
+        id: 'base64Binary',
+        type: 'string',
+        media: {
+            "binaryEncoding": "base64"
+        }
+    }
 }
 
 var assert = function(pred, msg){if(!pred) { throw new Error(msg || "Assert failed")}}
@@ -174,6 +240,7 @@ var addToSchema = function (sch, elem){
 var addStructureDefinition = function(schema, structureDefinition){
     var rt = structureDefinition.name
     if(OVERRIDEN[rt]) {return schema}
+    if(isPrimitive(rt)) {return schema}
     var sd =  structureDefinition
         .snapshot
         .element
@@ -216,59 +283,9 @@ var fixSchema = function(schema){
     if(schema.definitions.Element){
         schema.definitions.Element.additionalProperties = true
     }
-    schema.definitions.date = {
-        id: 'date',
-        type: 'string',
-        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/
-    }
-    schema.definitions.decimal = {
-        id: 'decimal',
-        type: 'number'
-    }
-    schema.definitions.uri = {
-        id: 'uri',
-        type: 'string'
-    }
-    schema.definitions.dateTime = {
-        id: 'dateTime',
-        type: 'string',
-        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/
-    }
-    schema.definitions.instant = {
-        id: 'instant',
-        type: 'string',
-        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/
-    }
-    schema.definitions.time = {
-        id: 'time',
-        type: 'string',
-        pattern: /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/
-    }
-    schema.definitions.code = {
-        id: 'code',
-        type: 'string',
-        pattern: /[^\s]+([\s]+[^\s]+)*/
-    }
-    schema.definitions.code = {
-        id: 'markdown',
-        type: 'string'
-    }
-    schema.definitions.id = {
-        id: 'id',
-        type: 'string',
-        pattern: /[A-Za-z0-9\-\.]{1,64}/
-    }
-    schema.definitions.oid = {
-        id: 'oid',
-        type: 'string',
-        pattern: /urn:oid:[0-2](\.[1-9]\d*)+/
-    }
-    schema.definitions.base64Binary = {
-        id: 'base64Binary',
-        type: 'string',
-        media: {
-            "binaryEncoding": "base64"
-        }
+    for(var k in OVERRIDEN){
+        var v = OVERRIDEN[k]
+        schema.definitions[k] = v
     }
     return schema;
 }
