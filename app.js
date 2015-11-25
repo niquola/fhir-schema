@@ -83,12 +83,14 @@
 	  $scope.resource = '{"resourceType": "Patient", "name": {"given": ["John"]}}';
 	  $scope.update = function() {
 	    var e, error, resource;
+	    $scope.parseError = null;
 	    try {
 	      resource = JSON.parse($scope.resource);
-	      $scope.parseError = null;
-	      return $scope.result = fhir.validate(resource);
+	      $scope.result = fhir.validate(resource);
+	      return console.log($scope.result);
 	    } catch (error) {
 	      e = error;
+	      $scope.result = null;
 	      return $scope.parseError = e.toString();
 	    }
 	  };
@@ -131,7 +133,7 @@
 /* 5 */
 /***/ function(module, exports) {
 
-	var v1="<div class=\"main-menu row\"><div class=\"container\"><div class=\"col-xs-10\"><h3> fhir-schema</h3></div><div class=\"col-xs-2\"><h3><a href=\"https://github.com/niquola/fhir-schema\">sources</a></h3></div></div></div><div class=\"container\"><br><div class=\"row\"><div class=\"col-xs-12\"><textarea ng-model=\"resource\" ui-codemirror=\"codemirrorConfig\" ng-change=\"update()\" class=\"fh form-control\"></textarea><br><div ng-if=\"parseError\" class=\"alert alert-danger\">{{parseError}}</div></div></div><div ng-if=\"result.errors.length\" class=\"alert alert-danger\"><div ng-repeat=\"err in result.errors\"> <h4 ng-click=\"err.show = !err.show\" class=\"item\"><b>{{err.dataPath.replace('/','.')}} </b>{{err.message}} &nbsp;<code>{{err.params | json}}</code></h4><div ng-if=\"err.show\"> <br><pre>{{ err | json }}</pre></div></div></div></div>";
+	var v1="<div class=\"main-menu row\"><div class=\"container\"><div class=\"col-xs-10\"><h3> fhir-schema</h3></div><div class=\"col-xs-2\"><h3><a href=\"https://github.com/niquola/fhir-schema\">sources</a></h3></div></div></div><div class=\"container\"><br><div class=\"row\"><div class=\"col-xs-12\"><textarea ng-model=\"resource\" ui-codemirror=\"codemirrorConfig\" ng-change=\"update()\" class=\"fh form-control\"></textarea><br><div ng-if=\"parseError\" class=\"alert alert-danger\">{{parseError}}</div></div></div><div ng-if=\"result.valid\" class=\"alert alert-success\">Valid Resource</div><div ng-repeat=\"err in result.errors\" ng-click=\"err.show = !err.show\" class=\"alert alert-danger\"> <h4 class=\"item\"><b>{{err.dataPath.replace('/','.')}} </b>{{err.message}} &nbsp;<code>{{err.params | json}}</code></h4><div ng-if=\"err.show\"> <br><pre>{{ err | json }}</pre></div></div></div>";
 	window.angular.module(["ng"]).run(["$templateCache",function(c){c.put("_index.jade", v1)}]);
 	module.exports=v1;
 
