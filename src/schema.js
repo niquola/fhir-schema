@@ -1,94 +1,19 @@
 tv4 = require('tv4')
 
-settings = {}
+settings = {validate: {references: false}}
 exports.settings = settings
 
-OVERRIDEN = {
-    date: {
-        id: 'date',
-        type: 'string',
-        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/
-    },
-    decimal: {
-        id: 'decimal',
-        type: 'number'
-    },
-    uri: {
-        id: 'uri',
-        type: 'string'
-    },
-    dateTime: {
-        id: 'dateTime',
-        type: 'string',
-        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/
-    },
-    instant: {
-        id: 'instant',
-        type: 'string',
-        pattern: /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/
-    },
-    time: {
-        id: 'time',
-        type: 'string',
-        pattern: /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/
-    },
-    code: {
-        id: 'code',
-        type: 'string',
-        pattern: /[^\s]+([\s]+[^\s]+)*/
-    },
-    markdown: {
-        id: 'markdown',
-        type: 'string'
-    },
-    id: {
-        id: 'id',
-        type: 'string',
-        pattern: /[A-Za-z0-9\-\.]{1,64}/
-    },
-    oid: {
-        id: 'oid',
-        type: 'string',
-        pattern: /urn:oid:[0-2](\.[1-9]\d*)+/
-    },
-    unsignedInt: {
-        type: 'integer',
-        minimum: 0,
-        exclusiveMinimum: true
-    },
-    positiveInt: {
-        type: 'integer',
-        minimum: 0,
-        exclusiveMinimum: true
-    },
-    uuid: {
-        id: 'uuid',
-        type: 'string'
-    },
-    base64Binary: {
-        id: 'base64Binary',
-        type: 'string',
-        media: {
-            "binaryEncoding": "base64"
-        }
-    }
-}
+var OVERRIDEN = require('./primitives')
 
-var assert = function(pred, msg){if(!pred) { throw new Error(msg || "Assert failed")}}
+var utils = require('./utils')
 
 var isPrimitive = function(tp){
     return ['string', 'integer', 'number', 'boolean'].indexOf(tp) > -1
 }
 
 var typeRef = function(tp){
-    assert(tp, "expected type")
+    utils.assert(tp, "expected type")
     return 'main#/definitions/' + tp;
-}
-
-var getIn = function(obj, path){
-    return path.reduce(function(acc, next){
-        return acc ? acc[next] : acc;
-    }, obj);
 }
 
 var isRequired = function(el){ return (el.min && el.min === 1) || false; }
@@ -97,72 +22,83 @@ var minItems = function(el){ return (el.min && el.min === 0) ? 0 : el.min; }
 
 var isPolymorphic = function(el){ return el.path.indexOf('[x]') > -1;}
 
+var buildReferenceSchema = function(el){
+    var resources = el.type.reduce(function(acc, tp){
+        if(tp.profile){ acc.push(utils.last(tp.profile[0].split('/'))) }
+        return acc
+    }, [])
 
-var elementType = function(el){
-    if(! el.type) {return 'object';}
-    var code = getIn(el, ['type', 0, 'code'])
-    if (code === 'Reference') {
+    if(!settings.validate.references || resources.length === 0 || resources.indexOf('Resource') > -1){
         return {$ref: typeRef('Reference')}
     }
-    assert(el.type.length == 1, el.path + JSON.stringify(el.type));
-    assert(code, JSON.stringify(el))
+    var pattern  = '/(#|' + resources.join('|') + ')/i'
+    return { allOf: [
+        {$ref: typeRef('Reference')},
+        {type: 'object', properties: {reference: {type: 'string', pattern: pattern}}}
+    ]}
+}
+
+var elementType = function(el){
+    if(!el.type) {return 'object';}
+    var code = utils.getIn(el, ['type', 0, 'code'])
+    if (code === 'Reference') {
+        return buildReferenceSchema(el)
+    }
+
+    utils.assert(el.type.length == 1, el.path + JSON.stringify(el.type));
+    utils.assert(code, JSON.stringify(el))
+
     if(isPrimitive(code)) {
         return code;
-    } else if (code === 'BackboneElement') {
+    }
+    if (code === 'BackboneElement') {
         return 'object'
-    } else {
-        return {$ref: typeRef(code)}
     }
-}
-
-var copy = function(x){ return JSON.parse(JSON.stringify(x))}
-
-var capitalize = function(s){
-    assert(s, "Expecting string")
-    return s[0].toUpperCase() + s.slice(1);
-}
-
-var merge =function(src, attrs){
-    var target = copy(src);
-    for(var k in attrs){
-        target[k] = attrs[k];
-    }
-    return target;
+    return {$ref: typeRef(code)}
 }
 
 var expandPath = function(spath, tp){
     var path = spath.split('.')
     var last = path[path.length - 1]
     var newpath = path.slice(0, path.length - 1);
-    newpath.push(last.replace('[x]', capitalize(tp.code)))
+    newpath.push(last.replace('[x]', utils.capitalize(tp.code)))
     return newpath.join('.');
 }
 
 var isFhirPrimitive = function(el){
-    var tp = getIn(el, ['type', 0, 'code']);
+    var tp = utils.getIn(el, ['type', 0, 'code']);
     return tp && tp[0].toLowerCase() == tp[0]
 }
+
+var EXTENSION = {
+    type: 'object',
+    properties: {
+        extension: {
+            type: 'array',
+            items: {
+                oneOf: [{$ref: typeRef('Extension')}, {type: 'null'}]
+            }
+        }
+    }
+}
+var EXTENSION_ARRAY= {
+    type: 'array',
+    items: {oneOf: [EXTENSION, {type: 'null'}]}
+}
+
 var primitiveExtensions = function(prop, el){
     if(isFhirPrimitive(el)){
-        var path = copy(prop.$$path);
-        var last = path[path.length - 1];
-        path[path.length - 1] = "_" + last;
-        var eprop = null;
-        var extension = {type: 'object', properties: {extension: {type: 'array', items: {oneOf: [{$ref: typeRef('Extension')}, {type: 'null'}]}}}}
-        if(prop.type == 'array'){
-            eprop = {$$path: path, type: 'array', items: {oneOf: [extension, {type: 'null'}]}}
-        }else{
-            extension.$$path = path;
-            eprop = extension;
-        }
+        var path = utils.copy(prop.$$path);
+        path[path.length - 1] = "_" + utils.last(path);
+        var eprop = utils.merge((prop.type == 'array') ? EXTENSION_ARRAY : EXTENSION, {$$path: path})
         return [prop, eprop]
-    }else{
+    } else {
         return [prop]
     }
 }
 
 var onlyTypedElement2schema = function(el){
-    assert(el.path, JSON.stringify(el))
+    utils.assert(el.path, JSON.stringify(el))
     var path = el.path.split('.');
 
     var res = {$$path: path, title: el.short};
@@ -180,6 +116,8 @@ var onlyTypedElement2schema = function(el){
         var etp = elementType(el);
         if(etp.$ref){
             res.items.$ref = etp.$ref 
+        }else if(etp.allOf){
+            res.items.allOf = etp.allOf
         }else{
             res.items.type = etp;
         }
@@ -191,7 +129,9 @@ var onlyTypedElement2schema = function(el){
         // res.$$required = isRequired(el);
         var etp = elementType(el);
         if(etp.$ref){
-           res.$ref = etp.$ref 
+           res.$ref = etp.$ref
+        }else if(etp.allOf){
+            res.allOf = etp.allOf
         }else{
            res.type = etp;
         }
@@ -205,14 +145,23 @@ var onlyTypedElement2schema = function(el){
 }
 
 var element2schema = function(el){
-    assert(el.path, JSON.stringify(el))
+    utils.assert(el.path, JSON.stringify(el))
     if(isPolymorphic(el)){
-        return el.type.reduce(function(acc, tp){
-            var newpath = expandPath(el.path, tp);
-            return acc.concat(onlyTypedElement2schema(
-                merge(el, {type: [tp], path: newpath})
+        var groupedTypes = el.type.reduce(function(acc, tp){
+            acc[tp.code] = acc[tp.code] || []
+            acc[tp.code].push(tp)
+            return acc
+        }, {})
+
+        var result = []
+        for(var code in groupedTypes){
+            var types = groupedTypes[code]
+            var newpath = expandPath(el.path, {code: code});
+            result.push.apply(result, onlyTypedElement2schema(
+                utils.merge(el, {type: types, path: newpath})
             ))
-        }, []);
+        }
+        return result;
     }
     return onlyTypedElement2schema(el)
 };
@@ -228,7 +177,7 @@ var addToSchema = function (sch, elem){
         var item = path[i];
         cur.properties = cur.properties || {}
         cur = cur.properties[item]
-        assert(cur, item)
+        utils.assert(cur, item)
         if(cur.type && cur.type == 'array'){
             cur = cur.items;
         }
@@ -303,9 +252,9 @@ exports.buildSchema = function(cb){
     tv4.addSchema('main', schema);
     schema.validate = function(res){
         var rt = res.resourceType;
-        assert(rt, "expected resourceType prop")
+        utils.assert(rt, "expected resourceType prop")
         var sch = schema.definitions[rt]
-        assert(sch, "No schema for " + rt)
+        utils.assert(sch, "No schema for " + rt)
         return tv4.validateResult(res, sch)
     }
     return schema;

@@ -1,5 +1,6 @@
 assert = require('assert')
 sch = require('../src/schema.js');
+utils = require('../src/utils.js');
 
 fs = require('fs')
 yaml = require('js-yaml')
@@ -38,7 +39,7 @@ var schema = sch.buildSchema(function(s){
    return generateSchema(s);
 });
 
-// fs.writeFileSync('/tmp/fhir.schema.json', JSON.stringify(schema, null, "  "))
+fs.writeFileSync('/tmp/fhir.schema.json', JSON.stringify(schema, null, "  "))
 
 function jlog(x){console.log(JSON.stringify(x,null,"  "))}
 
@@ -50,25 +51,42 @@ var data = {
 }
 jlog(schema.validate(data));
 
+
+var SKIP_LIST = [
+    'canonical',
+    'questionnaire',
+    'testscript'
+]
+
 describe('conversion', function () {
     var items = fs.readdirSync(__dirname + '/../tmp/')
     var errors = 0;
-    for (var i=0; i< items.length; i++) {
+    var done = 0;
+    var limit = items.length
+    // limit = 100;
+    for (var i=0; i < limit; i++) {
         var file = items[i];
         it(file, function () {
-            if(file.indexOf('.json') > -1 && file.indexOf('questionnaire') == -1 && file.indexOf('testscript') == -1){
-                var resource = JSON.parse(fs.readFileSync(__dirname + '/../tmp/' + file))
-                var result = schema.validate(resource)
-                assert(!result.error)
-                if(result.error) {
-                    console.log(resource.resourceType, 'from', file)
-                    console.log('===============')
-                    errors++;
-                    console.log(JSON.stringify(result, null, " "))
-                }
+        var skip = SKIP_LIST.some(function(x){ return file.indexOf(x) > -1 })
+        if(file.match(/json$/) && !skip){
+            var resource = JSON.parse(fs.readFileSync(__dirname + '/../tmp/' + file))
+            var result = schema.validate(resource)
+            done++;
+            if(!result.valid) {
+                console.log(resource.resourceType, 'from', file)
+                console.log('===============')
+                var path = result.error.dataPath.replace(/^\//, '').split('/');
+                console.log('VALUE: ', JSON.stringify(utils.getIn(resource, path)))
+                errors++;
+                delete result.error.stack
+                console.log(JSON.stringify(result, null, " "))
+                console.log("")
             }
+            assert(!result.error)
+        }
         })
     }
-    console.log("PROCESSED: ", items.length)
+    console.log("PROCESSED: ", done)
     console.log("ERRORS: ", errors)
+    console.log("")
 })
