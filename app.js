@@ -4667,10 +4667,36 @@
 						"$ref": "main#/definitions/Period"
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Device|Practitioner|Location|HealthcareService|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"owner": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"description": {
 						"type": "string"
@@ -4856,13 +4882,52 @@
 						}
 					},
 					"recorder": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"reporter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|RelatedPerson|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"substance": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -5382,7 +5447,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Slot)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"comment": {
@@ -5462,7 +5540,20 @@
 									}
 								},
 								"actor": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Patient|Practitioner|RelatedPerson|Device|HealthcareService|Location)/i"
+												}
+											}
+										}
+									]
 								},
 								"required": {
 									"$ref": "main#/definitions/code"
@@ -5630,7 +5721,20 @@
 						}
 					},
 					"appointment": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Appointment)/i"
+									}
+								}
+							}
+						]
 					},
 					"start": {
 						"$ref": "main#/definitions/instant"
@@ -5682,7 +5786,20 @@
 						}
 					},
 					"actor": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Practitioner|RelatedPerson|Device|HealthcareService|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"participantStatus": {
 						"$ref": "main#/definitions/code"
@@ -6050,7 +6167,20 @@
 									}
 								},
 								"reference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner|Organization|Device|Patient|RelatedPerson)/i"
+												}
+											}
+										}
+									]
 								},
 								"userId": {
 									"$ref": "main#/definitions/Identifier"
@@ -6119,7 +6249,20 @@
 									}
 								},
 								"location": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Location)/i"
+												}
+											}
+										}
+									]
 								},
 								"policy": {
 									"type": "array",
@@ -6713,7 +6856,20 @@
 						"$ref": "main#/definitions/Reference"
 					},
 					"author": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Patient|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"created": {
 						"$ref": "main#/definitions/date"
@@ -6974,7 +7130,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"identifier": {
 						"type": "array",
@@ -7858,7 +8027,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -7882,7 +8064,20 @@
 						}
 					},
 					"context": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter|EpisodeOfCare)/i"
+									}
+								}
+							}
+						]
 					},
 					"period": {
 						"$ref": "main#/definitions/Period"
@@ -7891,7 +8086,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Patient|Practitioner|RelatedPerson|Organization)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"modified": {
@@ -7947,7 +8155,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Condition)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"support": {
@@ -8027,7 +8248,20 @@
 									}
 								},
 								"plan": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|CarePlan)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -8084,7 +8318,20 @@
 									"$ref": "main#/definitions/CodeableConcept"
 								},
 								"member": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner|RelatedPerson|Patient|Organization)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -8093,7 +8340,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Goal)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"activity": {
@@ -8159,7 +8419,20 @@
 									}
 								},
 								"reference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Appointment|CommunicationRequest|DeviceUseRequest|DiagnosticOrder|MedicationOrder|NutritionOrder|Order|ProcedureRequest|ProcessRequest|ReferralRequest|SupplyRequest|VisionPrescription)/i"
+												}
+											}
+										}
+									]
 								},
 								"detail": {
 									"type": "object",
@@ -8230,14 +8503,40 @@
 											"type": "array",
 											"minItems": 0,
 											"items": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|Condition)/i"
+															}
+														}
+													}
+												]
 											}
 										},
 										"goal": {
 											"type": "array",
 											"minItems": 0,
 											"items": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|Goal)/i"
+															}
+														}
+													}
+												]
 											}
 										},
 										"status": {
@@ -8313,20 +8612,59 @@
 											}
 										},
 										"location": {
-											"$ref": "main#/definitions/Reference"
+											"allOf": [
+												{
+													"$ref": "main#/definitions/Reference"
+												},
+												{
+													"type": "object",
+													"properties": {
+														"reference": {
+															"type": "string",
+															"pattern": "/(#|Location)/i"
+														}
+													}
+												}
+											]
 										},
 										"performer": {
 											"type": "array",
 											"minItems": 0,
 											"items": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|Practitioner|Organization|RelatedPerson|Patient)/i"
+															}
+														}
+													}
+												]
 											}
 										},
 										"productCodeableConcept": {
 											"$ref": "main#/definitions/CodeableConcept"
 										},
 										"productReference": {
-											"$ref": "main#/definitions/Reference"
+											"allOf": [
+												{
+													"$ref": "main#/definitions/Reference"
+												},
+												{
+													"type": "object",
+													"properties": {
+														"reference": {
+															"type": "string",
+															"pattern": "/(#|Medication|Substance)/i"
+														}
+													}
+												}
+											]
 										},
 										"dailyAmount": {
 											"$ref": "main#/definitions/Quantity"
@@ -8532,13 +8870,52 @@
 						}
 					},
 					"target": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"provider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"use": {
 						"$ref": "main#/definitions/code"
@@ -8568,16 +8945,68 @@
 						"$ref": "main#/definitions/Coding"
 					},
 					"enterer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"facility": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"prescription": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|MedicationOrder|VisionPrescription)/i"
+									}
+								}
+							}
+						]
 					},
 					"originalPrescription": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|MedicationOrder)/i"
+									}
+								}
+							}
+						]
 					},
 					"payee": {
 						"type": "object",
@@ -8635,18 +9064,70 @@
 								"$ref": "main#/definitions/Coding"
 							},
 							"provider": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Practitioner)/i"
+											}
+										}
+									}
+								]
 							},
 							"organization": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Organization)/i"
+											}
+										}
+									}
+								]
 							},
 							"person": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Patient)/i"
+											}
+										}
+									}
+								]
 							}
 						}
 					},
 					"referral": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ReferralRequest)/i"
+									}
+								}
+							}
+						]
 					},
 					"diagnosis": {
 						"type": "array",
@@ -8731,7 +9212,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"coverage": {
 						"type": "array",
@@ -8824,7 +9318,20 @@
 									}
 								},
 								"coverage": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Coverage)/i"
+												}
+											}
+										}
+									]
 								},
 								"businessArrangement": {
 									"type": "string"
@@ -8893,7 +9400,20 @@
 									}
 								},
 								"claimResponse": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|ClaimResponse)/i"
+												}
+											}
+										}
+									]
 								},
 								"originalRuleset": {
 									"$ref": "main#/definitions/Coding"
@@ -9033,7 +9553,20 @@
 									"$ref": "main#/definitions/Coding"
 								},
 								"provider": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner)/i"
+												}
+											}
+										}
+									]
 								},
 								"diagnosisLinkId": {
 									"type": "array",
@@ -9744,7 +10277,20 @@
 						}
 					},
 					"request": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Claim)/i"
+									}
+								}
+							}
+						]
 					},
 					"ruleset": {
 						"$ref": "main#/definitions/Coding"
@@ -9774,13 +10320,52 @@
 						}
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestProvider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"outcome": {
 						"$ref": "main#/definitions/code"
@@ -11025,7 +11610,20 @@
 									}
 								},
 								"coverage": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Coverage)/i"
+												}
+											}
+										}
+									]
 								},
 								"businessArrangement": {
 									"type": "string"
@@ -11094,7 +11692,20 @@
 									}
 								},
 								"claimResponse": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|ClaimResponse)/i"
+												}
+											}
+										}
+									]
 								},
 								"originalRuleset": {
 									"$ref": "main#/definitions/Coding"
@@ -11216,10 +11827,36 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"assessor": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -11285,13 +11922,39 @@
 						}
 					},
 					"previous": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ClinicalImpression)/i"
+									}
+								}
+							}
+						]
 					},
 					"problem": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Condition|AllergyIntolerance)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"triggerCodeableConcept": {
@@ -11355,7 +12018,20 @@
 									"type": "array",
 									"minItems": 0,
 									"items": {
-										"$ref": "main#/definitions/Reference"
+										"allOf": [
+											{
+												"$ref": "main#/definitions/Reference"
+											},
+											{
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "string",
+														"pattern": "/(#|Observation|QuestionnaireResponse|FamilyMemberHistory|DiagnosticReport)/i"
+													}
+												}
+											}
+										]
 									}
 								}
 							}
@@ -11585,14 +12261,40 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|CarePlan|Appointment|CommunicationRequest|DeviceUseRequest|DiagnosticOrder|MedicationOrder|NutritionOrder|Order|ProcedureRequest|ProcessRequest|ReferralRequest|SupplyRequest|VisionPrescription)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"action": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|ReferralRequest|ProcedureRequest|Procedure|MedicationOrder|DiagnosticOrder|NutritionOrder|SupplyRequest|Appointment)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"resourceType": {
@@ -11719,13 +12421,39 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"sender": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device|Organization|Patient|Practitioner|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"recipient": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Device|Organization|Patient|Practitioner|RelatedPerson|Group)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"payload": {
@@ -11835,7 +12563,20 @@
 						}
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"sent": {
 						"$ref": "main#/definitions/dateTime"
@@ -11887,10 +12628,36 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestDetail": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|CommunicationRequest)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -12016,13 +12783,39 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"sender": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device|Organization|Patient|Practitioner|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"recipient": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Device|Organization|Patient|Practitioner|RelatedPerson)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"payload": {
@@ -12111,7 +12904,20 @@
 						}
 					},
 					"requester": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Patient|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -12135,7 +12941,20 @@
 						}
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"scheduledDateTime": {
 						"$ref": "main#/definitions/dateTime"
@@ -12190,7 +13009,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"priority": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -12408,7 +13240,20 @@
 						"type": "array",
 						"minItems": 1,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Practitioner|Device|Patient|RelatedPerson)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"attester": {
@@ -12523,13 +13368,39 @@
 									}
 								},
 								"party": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Patient|Practitioner|Organization)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
 					},
 					"custodian": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"event": {
 						"type": "array",
@@ -12600,7 +13471,20 @@
 						}
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"section": {
 						"type": "array",
@@ -13155,7 +14039,20 @@
 						}
 					},
 					"sourceReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ValueSet|StructureDefinition)/i"
+									}
+								}
+							}
+						]
 					},
 					"targetUri": {
 						"$ref": "main#/definitions/uri"
@@ -13179,7 +14076,20 @@
 						}
 					},
 					"targetReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ValueSet|StructureDefinition)/i"
+									}
+								}
+							}
+						]
 					},
 					"element": {
 						"type": "array",
@@ -13651,13 +14561,52 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"asserter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"dateRecorded": {
 						"$ref": "main#/definitions/date"
@@ -13913,7 +14862,20 @@
 								"type": "array",
 								"minItems": 0,
 								"items": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|ClinicalImpression|DiagnosticReport|Observation)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -14731,7 +15693,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|StructureDefinition)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"rest": {
@@ -15090,7 +16065,20 @@
 												}
 											},
 											"profile": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|StructureDefinition)/i"
+															}
+														}
+													}
+												]
 											},
 											"interaction": {
 												"type": "array",
@@ -15850,7 +16838,20 @@
 												}
 											},
 											"definition": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|OperationDefinition)/i"
+															}
+														}
+													}
+												]
 											}
 										}
 									}
@@ -16180,10 +17181,36 @@
 												}
 											},
 											"request": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|StructureDefinition)/i"
+															}
+														}
+													}
+												]
 											},
 											"response": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|StructureDefinition)/i"
+															}
+														}
+													}
+												]
 											},
 											"documentation": {
 												"type": "string"
@@ -16303,7 +17330,20 @@
 									}
 								},
 								"profile": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|StructureDefinition)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -16459,14 +17499,40 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Organization)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"domain": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Location)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"type": {
@@ -16542,7 +17608,20 @@
 									}
 								},
 								"entity": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Contract|Device|Group|Location|Organization|Patient|Practitioner|RelatedPerson|Substance)/i"
+												}
+											}
+										}
+									]
 								},
 								"role": {
 									"type": "array",
@@ -16738,7 +17817,20 @@
 									"$ref": "main#/definitions/Coding"
 								},
 								"party": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Organization|Patient|Practitioner|RelatedPerson)/i"
+												}
+											}
+										}
+									]
 								},
 								"signature": {
 									"type": "string"
@@ -16911,7 +18003,20 @@
 												}
 											},
 											"entity": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|Contract|Device|Group|Location|Organization|Patient|Practitioner|RelatedPerson|Substance)/i"
+															}
+														}
+													}
+												]
 											},
 											"role": {
 												"type": "array",
@@ -17090,7 +18195,20 @@
 						"$ref": "main#/definitions/Attachment"
 					},
 					"bindingReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Composition|DocumentReference|QuestionnaireResponse)/i"
+									}
+								}
+							}
+						]
 					},
 					"friendly": {
 						"type": "array",
@@ -17144,7 +18262,20 @@
 									"$ref": "main#/definitions/Attachment"
 								},
 								"contentReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Composition|DocumentReference|QuestionnaireResponse)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -17201,7 +18332,20 @@
 									"$ref": "main#/definitions/Attachment"
 								},
 								"contentReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Composition|DocumentReference|QuestionnaireResponse)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -17258,7 +18402,20 @@
 									"$ref": "main#/definitions/Attachment"
 								},
 								"contentReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|DocumentReference)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -17377,7 +18534,20 @@
 						}
 					},
 					"issuer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"bin": {
 						"$ref": "main#/definitions/Identifier"
@@ -17504,7 +18674,20 @@
 						}
 					},
 					"subscriber": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"network": {
 						"$ref": "main#/definitions/Identifier"
@@ -17513,7 +18696,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Contract)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"resourceType": {
@@ -18195,13 +19391,39 @@
 						}
 					},
 					"moduleMetadata": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ModuleMetadata)/i"
+									}
+								}
+							}
+						]
 					},
 					"library": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Library)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"trigger": {
@@ -18298,7 +19520,20 @@
 									"$ref": "main#/definitions/Timing"
 								},
 								"eventTimingReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Schedule)/i"
+												}
+											}
+										}
+									]
 								},
 								"eventTimingDate": {
 									"$ref": "main#/definitions/date"
@@ -18833,10 +20068,36 @@
 						}
 					},
 					"moduleMetadata": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ModuleMetadata)/i"
+									}
+								}
+							}
+						]
 					},
 					"moduleDefinition": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ModuleDefinition)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -18952,7 +20213,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"category": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -19028,7 +20302,20 @@
 						}
 					},
 					"author": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"identifier": {
 						"$ref": "main#/definitions/Identifier"
@@ -19127,7 +20414,20 @@
 									}
 								},
 								"author": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -19431,13 +20731,52 @@
 						}
 					},
 					"owner": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"location": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"contact": {
 						"type": "array",
@@ -19608,10 +20947,36 @@
 						}
 					},
 					"source": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"parent": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|DeviceComponent)/i"
+									}
+								}
+							}
+						]
 					},
 					"operationalStatus": {
 						"type": "array",
@@ -19848,10 +21213,36 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"source": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"parent": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|DeviceComponent)/i"
+									}
+								}
+							}
+						]
 					},
 					"operationalStatus": {
 						"$ref": "main#/definitions/code"
@@ -20150,7 +21541,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"bodySiteReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|BodySite)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -20174,10 +21578,36 @@
 						}
 					},
 					"device": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"identifier": {
 						"type": "array",
@@ -20285,7 +21715,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"timingTiming": {
 						"$ref": "main#/definitions/Timing"
@@ -20452,13 +21895,39 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"bodySiteReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|BodySite)/i"
+									}
+								}
+							}
+						]
 					},
 					"whenUsed": {
 						"$ref": "main#/definitions/Period"
 					},
 					"device": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"identifier": {
 						"type": "array",
@@ -20538,7 +22007,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"timingTiming": {
 						"$ref": "main#/definitions/Timing"
@@ -20681,10 +22163,36 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group|Location|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"orderer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"identifier": {
 						"type": "array",
@@ -20694,7 +22202,20 @@
 						}
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"reason": {
 						"type": "array",
@@ -20707,14 +22228,40 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Observation|Condition|DocumentReference)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"specimen": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Specimen)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"status": {
@@ -20853,7 +22400,20 @@
 									}
 								},
 								"actor": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner|Device)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -20913,7 +22473,20 @@
 									"type": "array",
 									"minItems": 0,
 									"items": {
-										"$ref": "main#/definitions/Reference"
+										"allOf": [
+											{
+												"$ref": "main#/definitions/Reference"
+											},
+											{
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "string",
+														"pattern": "/(#|Specimen)/i"
+													}
+												}
+											}
+										]
 									}
 								},
 								"bodySite": {
@@ -21105,10 +22678,36 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group|Device|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"effectiveDateTime": {
 						"$ref": "main#/definitions/dateTime"
@@ -21156,34 +22755,99 @@
 						}
 					},
 					"performer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"request": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|DiagnosticOrder|ProcedureRequest|ReferralRequest)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"specimen": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Specimen)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"result": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Observation)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"imagingStudy": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|ImagingStudy|ImagingObjectSelection)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"image": {
@@ -21256,7 +22920,20 @@
 									}
 								},
 								"link": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Media)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -21420,13 +23097,39 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Practitioner|Group|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"recipient": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Patient|Practitioner|RelatedPerson|Organization)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"type": {
@@ -21436,7 +23139,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Practitioner|Organization|Device|Patient|RelatedPerson)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"created": {
@@ -21761,7 +23477,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Practitioner|Group|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"type": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -21773,14 +23502,53 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Practitioner|Organization|Device|Patient|RelatedPerson)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"custodian": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"authenticator": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"created": {
 						"$ref": "main#/definitions/dateTime"
@@ -21918,7 +23686,20 @@
 									}
 								},
 								"target": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|DocumentReference)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -22065,7 +23846,20 @@
 								}
 							},
 							"encounter": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Encounter)/i"
+											}
+										}
+									}
+								]
 							},
 							"event": {
 								"type": "array",
@@ -22084,7 +23878,20 @@
 								"$ref": "main#/definitions/CodeableConcept"
 							},
 							"sourcePatientInfo": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Patient)/i"
+											}
+										}
+									}
+								]
 							},
 							"related": {
 								"type": "array",
@@ -22293,13 +24100,52 @@
 						}
 					},
 					"target": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"provider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -22422,7 +24268,20 @@
 						}
 					},
 					"request": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|EligibilityRequest)/i"
+									}
+								}
+							}
+						]
 					},
 					"outcome": {
 						"$ref": "main#/definitions/code"
@@ -22494,13 +24353,52 @@
 						}
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestProvider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -22750,20 +24648,59 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"episodeOfCare": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|EpisodeOfCare)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"incomingReferral": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|ReferralRequest)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"participant": {
@@ -22825,13 +24762,39 @@
 									"$ref": "main#/definitions/Period"
 								},
 								"individual": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner|RelatedPerson)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
 					},
 					"appointment": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Appointment)/i"
+									}
+								}
+							}
+						]
 					},
 					"period": {
 						"$ref": "main#/definitions/Period"
@@ -22850,7 +24813,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Condition|Procedure)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"hospitalization": {
@@ -22909,7 +24885,20 @@
 								"$ref": "main#/definitions/Identifier"
 							},
 							"origin": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Location)/i"
+											}
+										}
+									}
+								]
 							},
 							"admitSource": {
 								"$ref": "main#/definitions/CodeableConcept"
@@ -22918,7 +24907,20 @@
 								"type": "array",
 								"minItems": 0,
 								"items": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Condition)/i"
+												}
+											}
+										}
+									]
 								}
 							},
 							"reAdmission": {
@@ -22946,7 +24948,20 @@
 								}
 							},
 							"destination": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Location)/i"
+											}
+										}
+									}
+								]
 							},
 							"dischargeDisposition": {
 								"$ref": "main#/definitions/CodeableConcept"
@@ -22955,7 +24970,20 @@
 								"type": "array",
 								"minItems": 0,
 								"items": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Condition)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -23009,7 +25037,20 @@
 									}
 								},
 								"location": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Location)/i"
+												}
+											}
+										}
+									]
 								},
 								"status": {
 									"$ref": "main#/definitions/code"
@@ -23039,10 +25080,36 @@
 						}
 					},
 					"serviceProvider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"partOf": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -23192,19 +25259,84 @@
 						}
 					},
 					"target": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"provider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"coverage": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Coverage)/i"
+									}
+								}
+							}
+						]
 					},
 					"relationship": {
 						"$ref": "main#/definitions/Coding"
@@ -23330,7 +25462,20 @@
 						}
 					},
 					"request": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|EnrollmentRequest)/i"
+									}
+								}
+							}
+						]
 					},
 					"outcome": {
 						"$ref": "main#/definitions/code"
@@ -23402,13 +25547,52 @@
 						}
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestProvider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -23637,14 +25821,53 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Condition)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"managingOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"period": {
 						"$ref": "main#/definitions/Period"
@@ -23653,11 +25876,37 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|ReferralRequest)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"careManager": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"careTeam": {
 						"type": "array",
@@ -23718,7 +25967,20 @@
 									"$ref": "main#/definitions/Period"
 								},
 								"member": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner|Organization)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -23844,7 +26106,20 @@
 						}
 					},
 					"request": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Claim)/i"
+									}
+								}
+							}
+						]
 					},
 					"outcome": {
 						"$ref": "main#/definitions/code"
@@ -23916,13 +26191,52 @@
 						}
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestProvider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -24045,7 +26359,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"date": {
 						"$ref": "main#/definitions/dateTime"
@@ -24516,13 +26843,52 @@
 						"$ref": "main#/definitions/Period"
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Location|Group|Organization|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"author": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device|Organization|Patient|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"code": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -24648,7 +27014,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"startDate": {
 						"$ref": "main#/definitions/date"
@@ -24772,7 +27151,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"author": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Practitioner|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"priority": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -24781,7 +27173,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Condition|Observation|MedicationStatement|NutritionOrder|ProcedureRequest|RiskAssessment)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"note": {
@@ -24843,7 +27248,20 @@
 									"$ref": "main#/definitions/CodeableConcept"
 								},
 								"resultReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Observation)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -25212,7 +27630,20 @@
 									}
 								},
 								"entity": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Patient|Practitioner|Device|Medication|Substance)/i"
+												}
+											}
+										}
+									]
 								},
 								"period": {
 									"$ref": "main#/definitions/Period"
@@ -25355,7 +27786,20 @@
 						}
 					},
 					"module": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|DecisionSupportRule|DecisionSupportServiceModule)/i"
+									}
+								}
+							}
+						]
 					},
 					"dateTime": {
 						"$ref": "main#/definitions/dateTime"
@@ -25400,13 +27844,52 @@
 						}
 					},
 					"inputParameters": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Parameters)/i"
+									}
+								}
+							}
+						]
 					},
 					"initiatingOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"initiatingPerson": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Person|Patient|Practitioner|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"userType": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -25418,10 +27901,36 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"receivingOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"receivingPerson": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Person|Patient|Practitioner|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"recipientType": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -25570,7 +28079,20 @@
 						}
 					},
 					"module": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|DecisionSupportServiceModule|DecisionSupportRule)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -25597,11 +28119,37 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|OperationOutcome)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"outputParameters": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Parameters)/i"
+									}
+								}
+							}
+						]
 					},
 					"action": {
 						"type": "array",
@@ -25693,7 +28241,20 @@
 									"type": "array",
 									"minItems": 0,
 									"items": {
-										"$ref": "main#/definitions/Reference"
+										"allOf": [
+											{
+												"$ref": "main#/definitions/Reference"
+											},
+											{
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "string",
+														"pattern": "/(#|Patient|Person|Practitioner|RelatedPerson)/i"
+													}
+												}
+											}
+										]
 									}
 								},
 								"title": {
@@ -25921,7 +28482,20 @@
 						}
 					},
 					"providedBy": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"serviceCategory": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -25988,7 +28562,20 @@
 						}
 					},
 					"location": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"serviceName": {
 						"type": "string"
@@ -26067,7 +28654,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Location)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"serviceProvisionCode": {
@@ -26586,7 +29186,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"title": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -26613,7 +29226,20 @@
 						}
 					},
 					"author": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Device|Organization|Patient|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"authoringTime": {
 						"$ref": "main#/definitions/dateTime"
@@ -26727,7 +29353,20 @@
 									}
 								},
 								"imagingStudy": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|ImagingStudy)/i"
+												}
+											}
+										}
+									]
 								},
 								"series": {
 									"type": "array",
@@ -27188,7 +29827,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"uid": {
 						"$ref": "main#/definitions/oid"
@@ -27225,7 +29877,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|DiagnosticOrder)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"modalityList": {
@@ -27236,7 +29901,20 @@
 						}
 					},
 					"referrer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"availability": {
 						"$ref": "main#/definitions/code"
@@ -27326,11 +30004,37 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Procedure)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"interpreter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"description": {
 						"type": "string"
@@ -27889,7 +30593,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"wasNotGiven": {
 						"type": "boolean"
@@ -27934,19 +30651,84 @@
 						}
 					},
 					"performer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"requester": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"manufacturer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"location": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"lotNumber": {
 						"type": "string"
@@ -28144,7 +30926,20 @@
 									}
 								},
 								"detail": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Observation)/i"
+												}
+											}
+										}
+									]
 								},
 								"reported": {
 									"type": "boolean"
@@ -28261,7 +31056,20 @@
 									}
 								},
 								"authority": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Organization)/i"
+												}
+											}
+										}
+									]
 								},
 								"series": {
 									"type": "string"
@@ -28442,7 +31250,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"recommendation": {
 						"type": "array",
@@ -28710,7 +31531,20 @@
 											}
 										},
 										"authority": {
-											"$ref": "main#/definitions/Reference"
+											"allOf": [
+												{
+													"$ref": "main#/definitions/Reference"
+												},
+												{
+													"type": "object",
+													"properties": {
+														"reference": {
+															"type": "string",
+															"pattern": "/(#|Organization)/i"
+														}
+													}
+												}
+											]
 										},
 										"series": {
 											"type": "string"
@@ -28739,14 +31573,40 @@
 									"type": "array",
 									"minItems": 0,
 									"items": {
-										"$ref": "main#/definitions/Reference"
+										"allOf": [
+											{
+												"$ref": "main#/definitions/Reference"
+											},
+											{
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "string",
+														"pattern": "/(#|Immunization)/i"
+													}
+												}
+											}
+										]
 									}
 								},
 								"supportingPatientInformation": {
 									"type": "array",
 									"minItems": 0,
 									"items": {
-										"$ref": "main#/definitions/Reference"
+										"allOf": [
+											{
+												"$ref": "main#/definitions/Reference"
+											},
+											{
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "string",
+														"pattern": "/(#|Observation|AllergyIntolerance)/i"
+													}
+												}
+											}
+										]
 									}
 								}
 							}
@@ -29501,7 +32361,20 @@
 												"$ref": "main#/definitions/Reference"
 											},
 											"exampleFor": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|StructureDefinition)/i"
+															}
+														}
+													}
+												]
 											}
 										}
 									}
@@ -29579,7 +32452,20 @@
 									}
 								},
 								"profile": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|StructureDefinition)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -29997,10 +32883,36 @@
 						}
 					},
 					"moduleMetadata": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ModuleMetadata)/i"
+									}
+								}
+							}
+						]
 					},
 					"moduleDefinition": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ModuleDefinition)/i"
+									}
+								}
+							}
+						]
 					},
 					"document": {
 						"$ref": "main#/definitions/Attachment"
@@ -30150,13 +33062,52 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group|Device|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"source": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Patient|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -30685,10 +33636,36 @@
 						}
 					},
 					"managingOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"partOf": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -30832,13 +33809,39 @@
 						}
 					},
 					"moduleMetadata": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ModuleMetadata)/i"
+									}
+								}
+							}
+						]
 					},
 					"library": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Library)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"population": {
@@ -31205,10 +34208,36 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Practitioner|Group|Device|Specimen)/i"
+									}
+								}
+							}
+						]
 					},
 					"operator": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"view": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -31459,7 +34488,20 @@
 						}
 					},
 					"manufacturer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"product": {
 						"type": "object",
@@ -31565,7 +34607,20 @@
 											}
 										},
 										"item": {
-											"$ref": "main#/definitions/Reference"
+											"allOf": [
+												{
+													"$ref": "main#/definitions/Reference"
+												},
+												{
+													"type": "object",
+													"properties": {
+														"reference": {
+															"type": "string",
+															"pattern": "/(#|Substance|Medication)/i"
+														}
+													}
+												}
+											]
 										},
 										"amount": {
 											"$ref": "main#/definitions/Ratio"
@@ -31772,7 +34827,20 @@
 											}
 										},
 										"item": {
-											"$ref": "main#/definitions/Reference"
+											"allOf": [
+												{
+													"$ref": "main#/definitions/Reference"
+												},
+												{
+													"type": "object",
+													"properties": {
+														"reference": {
+															"type": "string",
+															"pattern": "/(#|Medication)/i"
+														}
+													}
+												}
+											]
 										},
 										"amount": {
 											"$ref": "main#/definitions/Quantity"
@@ -31924,16 +34992,68 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"practitioner": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Patient|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"prescription": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|MedicationOrder)/i"
+									}
+								}
+							}
+						]
 					},
 					"wasNotGiven": {
 						"type": "boolean"
@@ -31998,13 +35118,39 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"medicationReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Medication)/i"
+									}
+								}
+							}
+						]
 					},
 					"device": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Device)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"note": {
@@ -32105,7 +35251,20 @@
 								"$ref": "main#/definitions/CodeableConcept"
 							},
 							"siteReference": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|BodySite)/i"
+											}
+										}
+									}
+								]
 							},
 							"route": {
 								"$ref": "main#/definitions/CodeableConcept"
@@ -32262,16 +35421,55 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"dispenser": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"authorizingPrescription": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|MedicationOrder)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"type": {
@@ -32287,7 +35485,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"medicationReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Medication)/i"
+									}
+								}
+							}
+						]
 					},
 					"whenPrepared": {
 						"$ref": "main#/definitions/dateTime"
@@ -32332,13 +35543,39 @@
 						}
 					},
 					"destination": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"receiver": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Patient|Practitioner)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"note": {
@@ -32465,7 +35702,20 @@
 									"$ref": "main#/definitions/CodeableConcept"
 								},
 								"siteReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|BodySite)/i"
+												}
+											}
+										}
+									]
 								},
 								"route": {
 									"$ref": "main#/definitions/CodeableConcept"
@@ -32557,7 +35807,20 @@
 								"type": "array",
 								"minItems": 0,
 								"items": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -32749,19 +36012,71 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"prescriber": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"reasonCodeableConcept": {
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"reasonReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Condition)/i"
+									}
+								}
+							}
+						]
 					},
 					"note": {
 						"type": "string"
@@ -32788,7 +36103,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"medicationReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Medication)/i"
+									}
+								}
+							}
+						]
 					},
 					"dosageInstruction": {
 						"type": "array",
@@ -32893,7 +36221,20 @@
 									"$ref": "main#/definitions/CodeableConcept"
 								},
 								"siteReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|BodySite)/i"
+												}
+											}
+										}
+									]
 								},
 								"route": {
 									"$ref": "main#/definitions/CodeableConcept"
@@ -32975,7 +36316,20 @@
 								"$ref": "main#/definitions/CodeableConcept"
 							},
 							"medicationReference": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Medication)/i"
+											}
+										}
+									}
+								]
 							},
 							"validityPeriod": {
 								"$ref": "main#/definitions/Period"
@@ -33070,7 +36424,20 @@
 						}
 					},
 					"priorPrescription": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|MedicationOrder)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -33193,10 +36560,36 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"informationSource": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Practitioner|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"dateAsserted": {
 						"$ref": "main#/definitions/dateTime"
@@ -33272,7 +36665,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"reasonForUseReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Condition)/i"
+									}
+								}
+							}
+						]
 					},
 					"effectiveDateTime": {
 						"$ref": "main#/definitions/dateTime"
@@ -33330,7 +36736,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"medicationReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Medication)/i"
+									}
+								}
+							}
+						]
 					},
 					"dosage": {
 						"type": "array",
@@ -33432,7 +36851,20 @@
 									"$ref": "main#/definitions/CodeableConcept"
 								},
 								"siteReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|BodySite)/i"
+												}
+											}
+										}
+									]
 								},
 								"route": {
 									"$ref": "main#/definitions/CodeableConcept"
@@ -33690,7 +37122,20 @@
 								}
 							},
 							"details": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|OperationOutcome)/i"
+											}
+										}
+									}
+								]
 							}
 						}
 					},
@@ -33905,7 +37350,20 @@
 									}
 								},
 								"target": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Device)/i"
+												}
+											}
+										}
+									]
 								},
 								"endpoint": {
 									"$ref": "main#/definitions/uri"
@@ -33932,16 +37390,68 @@
 						}
 					},
 					"enterer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"author": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"receiver": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"responsible": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"reason": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -34323,7 +37833,20 @@
 									"$ref": "main#/definitions/Attachment"
 								},
 								"documentReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|ModuleDefinition)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -34731,7 +38254,20 @@
 									}
 								},
 								"profile": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|StructureDefinition)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -34806,7 +38342,20 @@
 									}
 								},
 								"profile": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|StructureDefinition)/i"
+												}
+											}
+										}
+									]
 								},
 								"mustSupport": {
 									"type": "array",
@@ -34941,7 +38490,20 @@
 												}
 											},
 											"valueSetReference": {
-												"$ref": "main#/definitions/Reference"
+												"allOf": [
+													{
+														"$ref": "main#/definitions/Reference"
+													},
+													{
+														"type": "object",
+														"properties": {
+															"reference": {
+																"type": "string",
+																"pattern": "/(#|ValueSet)/i"
+															}
+														}
+													}
+												]
 											},
 											"codeableConcept": {
 												"type": "array",
@@ -35579,16 +39141,55 @@
 									}
 								},
 								"party": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Person|Organization)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
 					},
 					"publisher": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"steward": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"rightsDeclaration": {
 						"type": "string"
@@ -36216,7 +39817,20 @@
 						}
 					},
 					"replacedBy": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|NamingSystem)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -36332,10 +39946,36 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"orderer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"identifier": {
 						"type": "array",
@@ -36345,7 +39985,20 @@
 						}
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"dateTime": {
 						"$ref": "main#/definitions/dateTime"
@@ -36393,7 +40046,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|AllergyIntolerance)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"foodPreferenceModifier": {
@@ -37069,10 +40735,36 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group|Device|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"effectiveDateTime": {
 						"$ref": "main#/definitions/dateTime"
@@ -37123,7 +40815,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Practitioner|Organization|Patient|RelatedPerson)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"valueQuantity": {
@@ -37244,10 +40949,36 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"specimen": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Specimen)/i"
+									}
+								}
+							}
+						]
 					},
 					"device": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device|DeviceMetric)/i"
+									}
+								}
+							}
+						]
 					},
 					"referenceRange": {
 						"type": "array",
@@ -37403,7 +41134,20 @@
 									}
 								},
 								"target": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Observation|QuestionnaireResponse)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -38022,7 +41766,20 @@
 						}
 					},
 					"base": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|OperationDefinition)/i"
+									}
+								}
+							}
+						]
 					},
 					"system": {
 						"type": "boolean"
@@ -38283,7 +42040,20 @@
 									}
 								},
 								"profile": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|StructureDefinition)/i"
+												}
+											}
+										}
+									]
 								},
 								"binding": {
 									"type": "object",
@@ -38380,7 +42150,20 @@
 											}
 										},
 										"valueSetReference": {
-											"$ref": "main#/definitions/Reference"
+											"allOf": [
+												{
+													"$ref": "main#/definitions/Reference"
+												},
+												{
+													"type": "object",
+													"properties": {
+														"reference": {
+															"type": "string",
+															"pattern": "/(#|ValueSet)/i"
+														}
+													}
+												}
+											]
 										}
 									}
 								},
@@ -38808,13 +42591,52 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group|Device|Substance)/i"
+									}
+								}
+							}
+						]
 					},
 					"source": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"target": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization|Device|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"reasonCodeableConcept": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -39010,7 +42832,20 @@
 						}
 					},
 					"request": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Order)/i"
+									}
+								}
+							}
+						]
 					},
 					"date": {
 						"$ref": "main#/definitions/dateTime"
@@ -39034,7 +42869,20 @@
 						}
 					},
 					"who": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"orderStatus": {
 						"$ref": "main#/definitions/code"
@@ -39227,13 +43075,39 @@
 						}
 					},
 					"moduleMetadata": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ModuleMetadata)/i"
+									}
+								}
+							}
+						]
 					},
 					"library": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Library)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"item": {
@@ -39846,7 +43720,20 @@
 						}
 					},
 					"partOf": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"contact": {
 						"type": "array",
@@ -40303,7 +44190,20 @@
 									}
 								},
 								"organization": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Organization)/i"
+												}
+											}
+										}
+									]
 								},
 								"period": {
 									"$ref": "main#/definitions/Period"
@@ -40453,11 +44353,37 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Organization|Practitioner)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"managingOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"link": {
 						"type": "array",
@@ -40508,7 +44434,20 @@
 									}
 								},
 								"other": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Patient)/i"
+												}
+											}
+										}
+									]
 								},
 								"type": {
 									"$ref": "main#/definitions/code"
@@ -40682,13 +44621,52 @@
 						}
 					},
 					"target": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"provider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"request": {
 						"$ref": "main#/definitions/Reference"
@@ -40820,7 +44798,20 @@
 						}
 					},
 					"request": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|ProcessRequest)/i"
+									}
+								}
+							}
+						]
 					},
 					"outcome": {
 						"$ref": "main#/definitions/code"
@@ -40895,13 +44886,52 @@
 						"$ref": "main#/definitions/Period"
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestProvider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"detail": {
 						"type": "array",
@@ -40961,10 +44991,36 @@
 									"$ref": "main#/definitions/Reference"
 								},
 								"submitter": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Organization)/i"
+												}
+											}
+										}
+									]
 								},
 								"payee": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Organization)/i"
+												}
+											}
+										}
+									]
 								},
 								"date": {
 									"$ref": "main#/definitions/date"
@@ -41261,7 +45317,20 @@
 						"$ref": "main#/definitions/Attachment"
 					},
 					"managingOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"active": {
 						"type": "boolean"
@@ -41333,7 +45402,20 @@
 									}
 								},
 								"target": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Patient|Practitioner|RelatedPerson|Person)/i"
+												}
+											}
+										}
+									]
 								},
 								"assurance": {
 									"$ref": "main#/definitions/code"
@@ -41615,7 +45697,20 @@
 									}
 								},
 								"managingOrganization": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Organization)/i"
+												}
+											}
+										}
+									]
 								},
 								"role": {
 									"$ref": "main#/definitions/CodeableConcept"
@@ -41634,14 +45729,40 @@
 									"type": "array",
 									"minItems": 0,
 									"items": {
-										"$ref": "main#/definitions/Reference"
+										"allOf": [
+											{
+												"$ref": "main#/definitions/Reference"
+											},
+											{
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "string",
+														"pattern": "/(#|Location)/i"
+													}
+												}
+											}
+										]
 									}
 								},
 								"healthcareService": {
 									"type": "array",
 									"minItems": 0,
 									"items": {
-										"$ref": "main#/definitions/Reference"
+										"allOf": [
+											{
+												"$ref": "main#/definitions/Reference"
+											},
+											{
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "string",
+														"pattern": "/(#|HealthcareService)/i"
+													}
+												}
+											}
+										]
 									}
 								}
 							}
@@ -41709,7 +45830,20 @@
 									"$ref": "main#/definitions/Period"
 								},
 								"issuer": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Organization)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -41842,7 +45976,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -41910,7 +46057,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"reasonReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Condition)/i"
+									}
+								}
+							}
+						]
 					},
 					"performer": {
 						"type": "array",
@@ -41961,7 +46121,20 @@
 									}
 								},
 								"actor": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner|Organization|Patient|RelatedPerson)/i"
+												}
+											}
+										}
+									]
 								},
 								"role": {
 									"$ref": "main#/definitions/CodeableConcept"
@@ -41994,10 +46167,36 @@
 						"$ref": "main#/definitions/Period"
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"location": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"outcome": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -42006,7 +46205,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|DiagnosticReport)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"complication": {
@@ -42024,7 +46236,20 @@
 						}
 					},
 					"request": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|CarePlan|DiagnosticOrder|ProcedureRequest|ReferralRequest)/i"
+									}
+								}
+							}
+						]
 					},
 					"notes": {
 						"type": "array",
@@ -42085,7 +46310,20 @@
 									"$ref": "main#/definitions/CodeableConcept"
 								},
 								"manipulated": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Device)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -42094,7 +46332,20 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Device|Medication|Substance)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"resourceType": {
@@ -42218,7 +46469,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group)/i"
+									}
+								}
+							}
+						]
 					},
 					"code": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -42234,7 +46498,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"reasonReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Condition)/i"
+									}
+								}
+							}
+						]
 					},
 					"scheduledDateTime": {
 						"$ref": "main#/definitions/dateTime"
@@ -42264,10 +46541,36 @@
 						"$ref": "main#/definitions/Timing"
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"performer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization|Patient|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -42343,7 +46646,20 @@
 						}
 					},
 					"orderer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Patient|RelatedPerson|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"priority": {
 						"$ref": "main#/definitions/code"
@@ -42535,13 +46851,52 @@
 						}
 					},
 					"target": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"provider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"request": {
 						"$ref": "main#/definitions/Reference"
@@ -42925,13 +47280,52 @@
 						}
 					},
 					"organization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestProvider": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"requestOrganization": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"form": {
 						"$ref": "main#/definitions/Coding"
@@ -43173,7 +47567,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"location": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"policy": {
 						"type": "array",
@@ -43269,7 +47676,20 @@
 									"$ref": "main#/definitions/Coding"
 								},
 								"actor": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Practitioner|RelatedPerson|Patient|Device|Organization)/i"
+												}
+											}
+										}
+									]
 								},
 								"userId": {
 									"$ref": "main#/definitions/Identifier"
@@ -43930,7 +48350,20 @@
 									}
 								},
 								"options": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|ValueSet)/i"
+												}
+											}
+										}
+									]
 								},
 								"option": {
 									"type": "array",
@@ -44066,7 +48499,20 @@
 						"$ref": "main#/definitions/Identifier"
 					},
 					"questionnaire": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Questionnaire)/i"
+									}
+								}
+							}
+						]
 					},
 					"status": {
 						"$ref": "main#/definitions/code"
@@ -44093,7 +48539,20 @@
 						"$ref": "main#/definitions/Reference"
 					},
 					"author": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Device|Practitioner|Patient|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"authored": {
 						"$ref": "main#/definitions/dateTime"
@@ -44117,10 +48576,36 @@
 						}
 					},
 					"source": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Practitioner|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"item": {
 						"type": "array",
@@ -44656,20 +49141,72 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"requester": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"recipient": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Practitioner|Organization)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"dateSent": {
 						"$ref": "main#/definitions/dateTime"
@@ -44854,7 +49391,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"relationship": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -45042,7 +49592,20 @@
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group)/i"
+									}
+								}
+							}
+						]
 					},
 					"date": {
 						"$ref": "main#/definitions/dateTime"
@@ -45066,13 +49629,52 @@
 						}
 					},
 					"condition": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Condition)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"performer": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"identifier": {
 						"$ref": "main#/definitions/Identifier"
@@ -45365,7 +49967,20 @@
 						}
 					},
 					"actor": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Practitioner|RelatedPerson|Device|HealthcareService|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"planningHorizon": {
 						"$ref": "main#/definitions/Period"
@@ -46022,7 +50637,20 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"schedule": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Schedule)/i"
+									}
+								}
+							}
+						]
 					},
 					"freeBusyType": {
 						"$ref": "main#/definitions/code"
@@ -46277,11 +50905,37 @@
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Specimen)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"subject": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient|Group|Device|Substance)/i"
+									}
+								}
+							}
+						]
 					},
 					"accessionIdentifier": {
 						"$ref": "main#/definitions/Identifier"
@@ -46360,7 +51014,20 @@
 								}
 							},
 							"collector": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|Practitioner)/i"
+											}
+										}
+									}
+								]
 							},
 							"comment": {
 								"type": "array",
@@ -46515,7 +51182,20 @@
 									"type": "array",
 									"minItems": 0,
 									"items": {
-										"$ref": "main#/definitions/Reference"
+										"allOf": [
+											{
+												"$ref": "main#/definitions/Reference"
+											},
+											{
+												"type": "object",
+												"properties": {
+													"reference": {
+														"type": "string",
+														"pattern": "/(#|Substance)/i"
+													}
+												}
+											}
+										]
 									}
 								}
 							}
@@ -46610,7 +51290,20 @@
 									"$ref": "main#/definitions/CodeableConcept"
 								},
 								"additiveReference": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Substance)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -48135,7 +52828,20 @@
 									"$ref": "main#/definitions/Ratio"
 								},
 								"substance": {
-									"$ref": "main#/definitions/Reference"
+									"allOf": [
+										{
+											"$ref": "main#/definitions/Reference"
+										},
+										{
+											"type": "object",
+											"properties": {
+												"reference": {
+													"type": "string",
+													"pattern": "/(#|Substance)/i"
+												}
+											}
+										}
+									]
 								}
 							}
 						}
@@ -48278,7 +52984,20 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"type": {
 						"$ref": "main#/definitions/CodeableConcept"
@@ -48287,10 +53006,36 @@
 						"$ref": "main#/definitions/Quantity"
 					},
 					"suppliedItem": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Medication|Substance|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"supplier": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"whenPrepared": {
 						"$ref": "main#/definitions/Period"
@@ -48317,13 +53062,39 @@
 						}
 					},
 					"destination": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Location)/i"
+									}
+								}
+							}
+						]
 					},
 					"receiver": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Practitioner)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"resourceType": {
@@ -48440,10 +53211,36 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"source": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Organization|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"date": {
 						"$ref": "main#/definitions/dateTime"
@@ -48494,13 +53291,39 @@
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"orderedItem": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Medication|Substance|Device)/i"
+									}
+								}
+							}
+						]
 					},
 					"supplier": {
 						"type": "array",
 						"minItems": 0,
 						"items": {
-							"$ref": "main#/definitions/Reference"
+							"allOf": [
+								{
+									"$ref": "main#/definitions/Reference"
+								},
+								{
+									"type": "object",
+									"properties": {
+										"reference": {
+											"type": "string",
+											"pattern": "/(#|Organization)/i"
+										}
+									}
+								}
+							]
 						}
 					},
 					"reasonCodeableConcept": {
@@ -49301,7 +54124,20 @@
 											}
 										},
 										"conformance": {
-											"$ref": "main#/definitions/Reference"
+											"allOf": [
+												{
+													"$ref": "main#/definitions/Reference"
+												},
+												{
+													"type": "object",
+													"properties": {
+														"reference": {
+															"type": "string",
+															"pattern": "/(#|Conformance)/i"
+														}
+													}
+												}
+											]
 										}
 									}
 								}
@@ -50957,19 +55793,71 @@
 						}
 					},
 					"patient": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Patient)/i"
+									}
+								}
+							}
+						]
 					},
 					"prescriber": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner)/i"
+									}
+								}
+							}
+						]
 					},
 					"encounter": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Encounter)/i"
+									}
+								}
+							}
+						]
 					},
 					"reasonCodeableConcept": {
 						"$ref": "main#/definitions/CodeableConcept"
 					},
 					"reasonReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Condition)/i"
+									}
+								}
+							}
+						]
 					},
 					"dispense": {
 						"type": "array",
@@ -51422,7 +56310,20 @@
 						"$ref": "main#/definitions/Period"
 					},
 					"assigner": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"resourceType": {
 						"type": "string"
@@ -51774,7 +56675,20 @@
 						}
 					},
 					"whoReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|RelatedPerson|Patient|Device|Organization)/i"
+									}
+								}
+							}
+						]
 					},
 					"contentType": {
 						"$ref": "main#/definitions/code"
@@ -52632,7 +57546,20 @@
 						}
 					},
 					"authorReference": {
-						"$ref": "main#/definitions/Reference"
+						"allOf": [
+							{
+								"$ref": "main#/definitions/Reference"
+							},
+							{
+								"type": "object",
+								"properties": {
+									"reference": {
+										"type": "string",
+										"pattern": "/(#|Practitioner|Patient|RelatedPerson)/i"
+									}
+								}
+							}
+						]
 					},
 					"authorString": {
 						"type": "string"
@@ -58076,7 +63003,20 @@
 								}
 							},
 							"valueSetReference": {
-								"$ref": "main#/definitions/Reference"
+								"allOf": [
+									{
+										"$ref": "main#/definitions/Reference"
+									},
+									{
+										"type": "object",
+										"properties": {
+											"reference": {
+												"type": "string",
+												"pattern": "/(#|ValueSet)/i"
+											}
+										}
+									}
+								]
 							}
 						}
 					},
