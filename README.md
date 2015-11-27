@@ -16,6 +16,9 @@ cd fhir-schema
 npm install
 npm run setup
 npm test
+
+# to build schemas into build folder
+npm run build
 ```
 
 ## Layout

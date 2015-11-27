@@ -5,7 +5,10 @@ require('ng-cache?!jade-env-html!./_index.jade')
 require('./app.less')
 require('angular-ui-codemirror')
 
-fhir = require('../../src/bundled.js')
+fhir = require('../../src/ajv.js')
+schema = require('../../build/fhir.schema.json')
+
+validator = fhir.load(schema)
 
 app = angular.module('app', [
   'ngCookies'
@@ -34,7 +37,7 @@ app.controller 'IndexCtrl', ($scope)->
     $scope.parseError = null
     try
       resource = JSON.parse($scope.resource)
-      $scope.result = fhir.validate(resource)
+      $scope.result = validator.validate(resource)
       console.log($scope.result)
     catch e
       $scope.result = null

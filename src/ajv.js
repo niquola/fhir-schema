@@ -29,8 +29,7 @@ function addCustomKeyword(validator){
     validator.addKeyword('schemaProperty', rootschema);
 }
 
-exports.makeSchema = function(cb){
-    var schema = gen.makeSchema(cb);
+exports.load = function(schema){
     var schemaProperty = {
         keyword: 'resourceType',
         schemas: {}
@@ -59,4 +58,9 @@ exports.makeSchema = function(cb){
         }
     };
     return schema;
+}
+
+exports.makeSchema = function(cb){
+    var schema = gen.makeSchema(cb);
+    return exports.load(schema)
 };

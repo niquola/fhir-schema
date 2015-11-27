@@ -30,11 +30,13 @@
         "ajv": "latest",
         "js-yaml": "latest",
         "json-loader": "latest",
+        "js-beautify": "latest",
         "mocha": "latest"
     },
     "scripts": {
         "test": "node_modules/mocha/bin/mocha --recursive",
-        "setup": "bash scripts/setup.sh"
+        "setup": "bash scripts/setup.sh",
+        "build": "node scripts/build.js"
     },
     "files": ["bin", "lib", "src"]
 }
