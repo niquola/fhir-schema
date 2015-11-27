@@ -1,72 +1,129 @@
 - element:
-    path: "Patient.birthDate"
-    short: "short"
-    definition: "definition"
+    path: Patient.birthDate
+    short: short
+    definition: definition
     min: 0
-    max: "*"
+    max: '*'
     type:
-      - code: "date"
+      - code: date
   result:
-    - type: array
+    - $$path:
+        - Patient
+        - birthDate
       title: short
-      $$path: ['Patient','birthDate']
+      type: array
       minItems: 0
       items:
-        type: {$ref: '#/definitions/date'}
-
+        oneOf:
+          - $ref: '#/definitions/date'
+          - type: 'null'
+    - type: array
+      items:
+        oneOf:
+          - type: object
+            properties:
+              extension:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/definitions/Extension'
+                    - type: 'null'
+          - type: 'null'
+      $$path:
+        - Patient
+        - _birthDate
 - element:
-    path: "Patient.birthDate"
-    short: "short"
-    definition: "definition"
+    path: Patient.birthDate
+    short: short
+    definition: definition
     min: 1
-    max: "1"
+    max: '1'
     type:
-      - code: "date"
+      - code: date
   result:
-    - type: {$ref: '#/definitions/date'}
+    - $$path:
+        - Patient
+        - birthDate
       title: short
-      $$path: ['Patient','birthDate']
-      # $$required: true
-
+      $ref: '#/definitions/date'
+    - type: object
+      properties:
+        extension:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/definitions/Extension'
+              - type: 'null'
+      $$path:
+        - Patient
+        - _birthDate
 - element:
-    path: "Patient.identifier"
-    short: "short"
+    path: Patient.identifier
+    short: short
     min: 0
-    max: "*"
+    max: '*'
     type:
-      - code: "Identifier"
+      - code: Identifier
   result:
-    - type: array
-      $$path: ['Patient','identifier']
+    - $$path:
+        - Patient
+        - identifier
       title: short
+      type: array
       minItems: 0
       items:
-        type: {$ref: '#/definitions/Identifier'}
-
+        $ref: '#/definitions/Identifier'
 - element:
-    path: "Patient.link"
-    short: "short"
+    path: Patient.link
+    short: short
     min: 0
-    max: "*"
+    max: '*'
     type:
-      - code: "BackboneElement"
+      - code: BackboneElement
   result:
-    - type: array
-      $$path: ['Patient','link']
+    - $$path:
+        - Patient
+        - link
       title: short
+      type: array
       minItems: 0
       items:
         type: object
 - element:
-    path: "Patient.link"
-    short: "short"
-    min: 1 
+    path: Patient.link
+    short: short
+    min: 1
     max: 1
     type:
-      - code: "BackboneElement"
+      - code: BackboneElement
   result:
-    - type: object
-      $$path: ['Patient','link']
+    - $$path:
+        - Patient
+        - link
       title: short
+      type: object
       additionalProperties: false
-      # $$required: true
+      properties:
+        fhir_comments:
+          type: array
+          items:
+            type: string
+- element:
+    path: Patient.link
+    short: short
+    min: 1
+    max: 1
+    type:
+      - code: BackboneElement
+  result:
+    - $$path:
+        - Patient
+        - link
+      title: short
+      type: object
+      additionalProperties: false
+      properties:
+        fhir_comments:
+          type: array
+          items:
+            type: string

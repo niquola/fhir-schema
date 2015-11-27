@@ -1,7 +1,7 @@
 fhir-schema
 =======
 
-[![Build Status](https://travis-ci.org/niquola/fhir-schema.svg)](https://travis-ci.org/niquola/fhir-schema)
+[![Build Status](https://travis-ci.org/fhir-js/fhir-schema.svg)](https://travis-ci.org/fhir-js/fhir-schema)
 
 [DEMO](http://niquola.github.io/fhir-schema/#/)
 
@@ -11,12 +11,16 @@ Convert FHIR structure definition into JSON schema.
 
 
 ```sh
-git clone
-bash ./loadsamples.sh
+git clone https://github.com/fhir-js/fhir-schema
+cd fhir-schema
 npm install
-npm install -g mocha
-mocha test/schema-test.js
+npm run setup
+npm test
 ```
+
+## Layout
+
+
 
 
 ## TODO:

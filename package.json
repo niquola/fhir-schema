@@ -24,15 +24,17 @@
         "url": "https://github.com/FHIR/fhir-validation.js/issues"
     },
     "homepage": "https://github.com/FHIR/fhir-validation.js",
-    "dependencies": {
-        "mocha": "latest",
-        "js-yaml": "latest",
+    "dependencies": { },
+    "devDependencies":{
         "tv4": "latest",
         "ajv": "latest",
-        "json-loader": "latest"
+        "js-yaml": "latest",
+        "json-loader": "latest",
+        "mocha": "latest"
     },
     "scripts": {
-        "test": "node_modules/mocha/bin/mocha --recursive"
+        "test": "node_modules/mocha/bin/mocha --recursive",
+        "setup": "bash scripts/setup.sh"
     },
     "files": ["bin", "lib", "src"]
 }
