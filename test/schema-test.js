@@ -6,7 +6,7 @@ fs = require('fs')
 yaml = require('js-yaml')
 
 function loadYaml (pth){
-   return yaml.safeLoad(fs.readFileSync(__dirname +'/' + pth, "utf8"));
+    return yaml.safeLoad(fs.readFileSync(__dirname +'/' + pth, "utf8"));
 }
 
 var tests = loadYaml('./elements-test.yaml')
@@ -36,7 +36,7 @@ function generateSchema(s){
 
 
 var schema = sch.buildSchema(function(s){
-   return generateSchema(s);
+    return generateSchema(s);
 });
 
 fs.writeFileSync('/tmp/fhir.schema.json', JSON.stringify(schema, null, "  "))
@@ -66,32 +66,31 @@ describe('conversion', function () {
     var limit = items.length
     for (var i=0; i < limit; i++) {
         var file = items[i];
-        it(file, function () {
         var skip = SKIP_LIST.some(function(x){ return file.indexOf(x) > -1 })
         if(file.match(/json$/) && !skip){
-            var resource = JSON.parse(fs.readFileSync(__dirname + '/../tmp/' + file))
-            var result = schema.validate(resource)
-            done++;
-            if(!result.valid) {
-                console.log(resource.resourceType, 'from', file)
-                console.log('===============')
-                result.errors.forEach(function(err){
-                    var path = err.dataPath.replace(']','').replace('[','.').split('.').splice(1);
-                    console.log('VALUE: ', JSON.stringify(utils.getIn(resource, path)))
-                })
-                errors++;
-                console.log(JSON.stringify(result, null, " "))
-                console.log("")
-            }
-            // assert(!result.error)
+            it(file, function () {
+                var resource = JSON.parse(fs.readFileSync(__dirname + '/../tmp/' + file))
+                var result = schema.validate(resource)
+                done++;
+                if(!result.valid) {
+                    console.log(resource.resourceType, 'from', file)
+                    console.log('===============')
+                    result.errors.forEach(function(err){
+                        var path = err.dataPath.replace(']','').replace('[','.').split('.').splice(1);
+                        console.log('VALUE: ', JSON.stringify(utils.getIn(resource, path)))
+                    })
+                    errors++;
+                    console.log(JSON.stringify(result, null, " "))
+                    console.log("")
+                }
+                assert(result.valid)
+            })
         }
-        })
     }
 
     after(function(){
         console.log("PROCESSED: ", done)
         console.log("ERRORS: ", errors)
         console.log("")
-        
     })
 })
