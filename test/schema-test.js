@@ -54,7 +54,7 @@ var data = {
 jlog(schema.validate(data));
 
 var SKIP_LIST = [
-    // 'canonical',
+    'canonical'
     // 'questionnaire',
     // 'testscript'
 ]
