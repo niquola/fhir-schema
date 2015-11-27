@@ -64,7 +64,6 @@ describe('conversion', function () {
     var errors = 0;
     var done = 0;
     var limit = items.length
-    limit = 10;
     for (var i=0; i < limit; i++) {
         var file = items[i];
         it(file, function () {
