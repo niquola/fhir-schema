@@ -14,3 +14,4 @@ tmp/
 fhir/
 src/bundled.js
 src/fhir.schema.jsondemo/dist
+examples/
