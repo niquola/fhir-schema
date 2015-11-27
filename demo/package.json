@@ -36,6 +36,6 @@
     "build": "npm install && `npm bin`/webpack --progress --colors",
     "watch": "`npm bin`/webpack --progress --colors --watch",
     "test": "npm run build && `npm bin`/coffee --compile test && ./node_modules/mocha/bin/mocha ./test/formmodel.coffee",
-    "test-watch": "./node_modules/mocha/bin/mocha -w --compilers coffee:coffee-script/register ./test/formmodel.coffee"
+    "publish": "npm run build && cd dist && git add . && git ci -m 'update' && git push origin gh-pages"
   }
 }
