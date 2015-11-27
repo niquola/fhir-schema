@@ -13,7 +13,7 @@ var isPrimitive = function(tp){
 
 var typeRef = function(tp){
     utils.assert(tp, "expected type")
-    return 'main#/definitions/' + tp;
+    return '#/definitions/' + (tp == 'id' ? 'fhir_id' : tp);
 }
 
 var isRequired = function(el){ return (el.min && el.min === 1) || false; }
@@ -107,7 +107,7 @@ var onlyTypedElement2schema = function(el){
     }
     if(path.length == 1){
         //root element
-        res.id = path[0]
+        // res.id = path[0]
         res.type = 'object'
     } else if (el.max === '*'){
         res.type = 'array' ;
@@ -177,7 +177,7 @@ var addToSchema = function (sch, elem){
         var item = path[i];
         cur.properties = cur.properties || {}
         cur = cur.properties[item]
-        utils.assert(cur, item)
+        utils.assert(cur, item + JSON.stringify(path))
         if(cur.type && cur.type == 'array'){
             cur = cur.items;
         }
@@ -194,12 +194,16 @@ var addToSchema = function (sch, elem){
 }
 var addStructureDefinition = function(schema, structureDefinition){
     var rt = structureDefinition.name
+    if(rt == 'id') {return schema}
     if(OVERRIDEN[rt]) {return schema}
     if(isPrimitive(rt)) {return schema}
     var sd =  structureDefinition
         .snapshot
         .element
         .reduce(function(acc, el){
+            // FIX: path for inherited data types
+            var path = [rt].concat(el.path.split('.').slice(1)).join('.')
+            el.path = path
             var res = element2schema(el)
             if(!res) throw new Error('UPS:' + el)
             return res.reduce(function(acc, el){
@@ -228,34 +232,73 @@ exports.addToSchema = function(schema, resource){
     }
 };
 
+var BASE_PROFILES = ['Resource', 'DomainResource', 'Element', 'BackboneElement']
+
 var fixSchema = function(schema){
-    if(schema.definitions.Resource){
-        schema.definitions.Resource.additionalProperties = true
-    }
-    if(schema.definitions.DomainResource){
-        schema.definitions.DomainResource.additionalProperties = true
-    }
-    if(schema.definitions.Element){
-        schema.definitions.Element.additionalProperties = true
-    }
-    for(var k in OVERRIDEN){
+    BASE_PROFILES.forEach(function(x){
+        if(schema.definitions[x]){
+            schema.definitions[x].additionalProperties = true
+        }
+    });
+    for(var k in OVERRIDEN) {
         var v = OVERRIDEN[k]
         schema.definitions[k] = v
     }
     return schema;
 }
 
+ajv = require('ajv')
+
 exports.buildSchema = function(cb){
     var schema = {};
     schema = cb(schema)
     fixSchema(schema)
-    tv4.addSchema('main', schema);
+
+    var schemaProperty = {keyword: 'resourceType', schemas: {}}
+    for(var k in schema.definitions){
+        schemaProperty.schemas[k] = typeRef(k)
+    }
+    schema.type = 'object'
+    schema.schemaProperty = schemaProperty
+    var validator = ajv({allErrors: true});
+    validator.addKeyword('schemaProperty',
+                         {
+                            inline: function (it, data){
+                                var $data = 'data' + (it.dataLevel || '');
+                                var out = ""
+                                var pairs = []
+                                for(var k in data.schemas){
+                                    var $refVal = it.resolveRef(it.baseId, data.schemas[k], it.isRoot)
+                                    $refVal =  $refVal.code || $refVal
+                                    if ($refVal === undefined) {
+                                    throw new Error("Could not resolve" + data.schemas[k])
+                                    }
+                                    pairs.push([k, $refVal])
+                                }
+                                var attrs = pairs.map(function(p){
+                                    return p[0] + ':' + p[1];
+                                }).join(',')
+                                return "(function(){ var ref = {" + attrs + "}[" + $data + ".resourceType]; "
+                                    + " var res = ref("+ $data +", (dataPath || '')); "
+                                    + " vErrors = ref.errors;"
+                                    + " errors = ref.errors ? ref.errors.length : errors;"
+                                    + " return true; })()"
+                            }
+                         })
+    var validate = validator.compile(schema);
+
     schema.validate = function(res){
         var rt = res.resourceType;
         utils.assert(rt, "expected resourceType prop")
         var sch = schema.definitions[rt]
         utils.assert(sch, "No schema for " + rt)
-        return tv4.validateResult(res, sch)
+        var valid = validate(res);
+        if (!valid){
+            return {errors: utils.copy(validate.errors), valid: false}
+        }else{
+            return {valid: true}
+        }
     }
     return schema;
 }
+

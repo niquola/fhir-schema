@@ -28,6 +28,7 @@
         "mocha": "latest",
         "js-yaml": "latest",
         "tv4": "latest",
+        "ajv": "latest",
         "json-loader": "latest"
     },
     "scripts": {

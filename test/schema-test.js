@@ -46,16 +46,17 @@ function jlog(x){console.log(JSON.stringify(x,null,"  "))}
 var data = {
     resourceType: "Patient",
     name: [{given: ['dups']}],
+    fo: 3,
     birthDate: '1980',
     gender: 'memale'
 }
+
 jlog(schema.validate(data));
 
-
 var SKIP_LIST = [
-    'canonical',
-    'questionnaire',
-    'testscript'
+    // 'canonical',
+    // 'questionnaire',
+    // 'testscript'
 ]
 
 describe('conversion', function () {
@@ -63,7 +64,7 @@ describe('conversion', function () {
     var errors = 0;
     var done = 0;
     var limit = items.length
-    // limit = 100;
+    limit = 10;
     for (var i=0; i < limit; i++) {
         var file = items[i];
         it(file, function () {
@@ -75,18 +76,23 @@ describe('conversion', function () {
             if(!result.valid) {
                 console.log(resource.resourceType, 'from', file)
                 console.log('===============')
-                var path = result.error.dataPath.replace(/^\//, '').split('/');
-                console.log('VALUE: ', JSON.stringify(utils.getIn(resource, path)))
+                result.errors.forEach(function(err){
+                    var path = err.dataPath.replace(']','').replace('[','.').split('.').splice(1);
+                    console.log('VALUE: ', JSON.stringify(utils.getIn(resource, path)))
+                })
                 errors++;
-                delete result.error.stack
                 console.log(JSON.stringify(result, null, " "))
                 console.log("")
             }
-            assert(!result.error)
+            // assert(!result.error)
         }
         })
     }
-    console.log("PROCESSED: ", done)
-    console.log("ERRORS: ", errors)
-    console.log("")
+
+    after(function(){
+        console.log("PROCESSED: ", done)
+        console.log("ERRORS: ", errors)
+        console.log("")
+        
+    })
 })
