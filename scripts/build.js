@@ -6,7 +6,7 @@ sch.settings.build = true;
 
 var schema = sch.makeSchema(function(s) {
   s.add(require(__dirname + "/../fhir/profiles-resources.json"));
-  //s.add(require(__dirname + '/../fhir/profiles-types.json'))
+  s.add(require(__dirname + "/../fhir/profiles-types.json"));
   return s;
 });
 

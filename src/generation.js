@@ -67,12 +67,14 @@ var elementType = function(el) {
     return "object";
   }
   var code = utils.getIn(el, ["type", 0, "code"]);
+  var _code = utils.getIn(el, ["type", 0, "_code"]);
   if (code === "Reference") {
     return buildReferenceSchema(el);
   }
 
   utils.assert(el.type.length == 1, el.path + JSON.stringify(el.type));
-  utils.assert(code, JSON.stringify(el));
+
+  utils.assert(code || _code, JSON.stringify(el));
 
   if (isPrimitive(code)) {
     return code;
