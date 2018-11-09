@@ -2,7 +2,12 @@
     "name": "fhir-schema.js",
     "version": "0.0.1",
     "devDependencies": {
-        "webpack-dev-server": "latest"
+        "tv4": "latest",
+        "ajv": "latest",
+        "js-yaml": "latest",
+        "json-loader": "latest",
+        "js-beautify": "latest",
+        "mocha": "latest"
     },
     "description": "FHIR javascript validation library",
     "repository": {
@@ -10,6 +15,9 @@
         "url": "git@github.com:FHIR/fhir-validation.js.git"
     },
     "scripts": {
+        "test": "node_modules/mocha/bin/mocha --recursive",
+        "setup": "bash scripts/setup.sh",
+        "build": "node scripts/build.js"
     },
     "keywords": [
         "fhir",
@@ -24,19 +32,10 @@
         "url": "https://github.com/FHIR/fhir-validation.js/issues"
     },
     "homepage": "https://github.com/FHIR/fhir-validation.js",
-    "dependencies": { },
-    "devDependencies":{
-        "tv4": "latest",
-        "ajv": "latest",
-        "js-yaml": "latest",
-        "json-loader": "latest",
-        "js-beautify": "latest",
-        "mocha": "latest"
-    },
-    "scripts": {
-        "test": "node_modules/mocha/bin/mocha --recursive",
-        "setup": "bash scripts/setup.sh",
-        "build": "node scripts/build.js"
-    },
-    "files": ["bin", "lib", "src"]
+    "dependencies": {},
+    "files": [
+        "bin",
+        "lib",
+        "src"
+    ]
 }

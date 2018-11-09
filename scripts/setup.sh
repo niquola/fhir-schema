@@ -1,7 +1,7 @@
 set +e
 rm -rf examples/*
 mkdir examples
-wget http://hl7-fhir.github.io/examples-json.zip -O ./examples/my.zip
+wget http://build.fhir.org/examples-json.zip -O ./examples/my.zip
 cd examples
 unzip my.zip
 cd ..
@@ -13,11 +13,11 @@ cd fhir
 rm *.json
 rm *.xml
 
-wget http://hl7-fhir.github.io/all-valuesets.zip
+wget http://build.fhir.org/all-valuesets.zip
 unzip all-valuesets.zip
 
 rm all-valuesets.zip
 rm *.xml
-wget http://hl7-fhir.github.io/search-parameters.json
-wget http://hl7-fhir.github.io/profiles-resources.json
-wget http://hl7-fhir.github.io/profiles-types.json
+wget http://build.fhir.org/search-parameters.json
+wget http://build.fhir.org/profiles-resources.json
+wget http://build.fhir.org/profiles-types.json

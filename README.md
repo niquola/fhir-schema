@@ -1,5 +1,4 @@
-fhir-schema
-=======
+# fhir-schema
 
 [![Build Status](https://travis-ci.org/fhir-js/fhir-schema.svg)](https://travis-ci.org/fhir-js/fhir-schema)
 
@@ -7,11 +6,18 @@ fhir-schema
 
 Convert FHIR structure definition into JSON schema.
 
+## Requirements
+
+Make sure you have NodeJS and wget installed.
+
+```
+brew install wget
+```
+
 ## Installation
 
-
 ```sh
-git clone https://github.com/fhir-js/fhir-schema
+git clone https://github.com/niquola/fhir-schema
 cd fhir-schema
 npm install
 npm run setup
@@ -23,11 +29,8 @@ npm run build
 
 ## Layout
 
-
-
-
 ## TODO:
 
-* refactoring
-* support for simple ValueSet
-* support for contained & Bundle validation
+- refactoring
+- support for simple ValueSet
+- support for contained & Bundle validation
