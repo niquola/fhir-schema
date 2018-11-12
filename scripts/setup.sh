@@ -18,6 +18,6 @@ unzip all-valuesets.zip
 
 rm all-valuesets.zip
 rm *.xml
-wget http://build.fhir.org/search-parameters.json
-wget http://build.fhir.org/profiles-resources.json
-wget http://build.fhir.org/profiles-types.json
+wget https://build.fhir.org/search-parameters.json
+wget https://build.fhir.org/profiles-resources.json
+wget https://build.fhir.org/profiles-types.json
